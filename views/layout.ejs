@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="css/style<% if (!debugging){ %>-<%- v %>.min.css<% }else{%>.css<%}%>">
+  </head>
+  <body>
+    <div id="main">
+    <%- body %>
+    </div>
+    <%- partial('loading') %>
+    <% if(debugging) { %>
+      <script type="text/javascript" src="js/jquery-1.6.1.min.js"></script> 
+      <script type="text/javascript" src="js/chosen.jquery.min.js"></script> 
+      <script type="text/javascript" src="js/setup.js"></script> 
+      <script type="text/javascript" src="js/utils.js"></script> 
+      <script type="text/javascript" src="js/menu.js"></script>
+      <script type="text/javascript" src="js/network.js"></script> 
+      <script type="text/javascript" src="js/filesystem.js"></script>  
+      <script type="text/javascript" src="js/properties.js"></script>
+      <script type="text/javascript" src="js/spinner.js"></script>
+      <script type="text/javascript" src="js/code.js"></script> 
+    <%} else {%>
+      <script src="js/all-<%- v %>.min.js"></script>
+    <%}%>
+    </body>
+</html>

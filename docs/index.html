@@ -1,0 +1,1949 @@
+<html>
+	<head>
+		<title>Gunnar</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<style>body {
+    margin: 0;
+    padding: 0;
+    font: 14px/1.5 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
+    color: #252519;
+}
+a {
+    color: #252519;
+}
+a:hover {
+    text-decoration: underline;
+    color: #19469D;
+}
+p {
+    margin: 12px 0;
+}
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+}
+table#source {
+    width: 100%;
+    border-collapse: collapse;
+}
+table#source td:first-child {
+    padding: 30px 40px 30px 40px;
+    vertical-align: top;
+}
+table#source td:first-child,
+table#source td:first-child pre {
+    width: 450px;
+}
+table#source td:last-child {
+    padding: 30px 0 30px 40px;
+    border-left: 1px solid #E5E5EE;
+    background: #F5F5FF;
+}
+table#source tr {
+    border-bottom: 1px solid #E5E5EE;
+}
+table#source tr.filename {
+    padding-top: 40px;
+    border-top: 1px solid #E5E5EE;
+}
+table#source tr.filename td:first-child {
+    text-transform: capitalize;
+}
+table#source tr.filename td:last-child {
+    font-size: 12px;
+}
+table#source tr.filename h2 {
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+table#source tr.code h1,
+table#source tr.code h2,
+table#source tr.code h3 {
+    margin-top: 30px;
+    font-family: "Lucida Grande", "Helvetica Nueue", Arial, sans-serif;
+    font-size: 18px;
+}
+table#source tr.code h2 {
+    font-size: 16px;
+}
+table#source tr.code h3 {
+    font-size: 14px;
+}
+table#source tr.code ul {
+    margin: 15px 0 15px 35px;
+    padding: 0;
+}
+table#source tr.code ul li {
+    margin: 0;
+    padding: 1px 0;
+}
+table#source tr.code ul li p {
+    margin: 0;
+    padding: 0;
+}
+table#source tr.code td:first-child pre {
+    padding: 20px;
+}
+#ribbon {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+code .string { color: #219161; }
+code .regexp { color: #219161; }
+code .keyword { color: #954121; }
+code .number { color: #19469D; }
+code .comment { color: #bbb; }
+code .this { color: #19469D; }</style>
+		<script>
+			$(function(){
+				$('tr.code').hide();
+				$('tr.filename').toggle(function(){
+					$(this).nextUntil('.filename').fadeIn();
+				}, function(){
+					$(this).nextUntil('.filename').fadeOut();
+				});
+			});
+		</script>
+	</head>
+	<body>
+<table id="source"><tbody><tr><td><h1>Gunnar</h1></td><td></td></tr><tr class="filename"><td><h2 id="public/js/code.js"><a href="#">code</a></h2></td><td>public/js/code.js</td></tr><tr class="code">
+<td class="docs">
+<p>Gunnar - Code.js</p>
+
+<p>Copyright (C) 2011 Joe McCann </p>
+
+<p>MIT Licensed
+ </p>
+</td>
+<td class="code">
+
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Dom Ready/Initialize Method</p>
+
+<p> </p>
+</td>
+<td class="code">
+<pre><code>$().<span class="variable">ready</span>(<span class="keyword">function</span>(){
+  
+  <span class="keyword">var</span> <span class="variable">_results</span> = $(<span class="string">'.results'</span>)
+    , <span class="variable">_init</span> = $(<span class="string">'.init'</span>)
+    , <span class="variable">_desktop</span> = $(<span class="string">'.desktop'</span>)
+    , <span class="variable">_form</span> = $(<span class="string">'.form'</span>)
+    , <span class="variable">_storeRackspaceCreds</span> = $(<span class="string">'#storeRackspaceCreds'</span>)
+    , <span class="variable">_container_list</span> = $(<span class="string">'#container_list'</span>)
+    , <span class="variable">_container_cname</span> = $(<span class="string">'#container_cname'</span>)
+    , <span class="variable">_default_checkbox</span> = $(<span class="string">'.container_list_container :checkbox'</span>)
+    , <span class="variable">_holder</span> = $(<span class="string">'#holder'</span>)
+    , <span class="variable">debug</span> = <span class="variable">w</span>.<span class="variable">debugging</span> || <span class="variable">false</span></code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Add &lt;wbr&gt; when needed in a string determined by the number passed in.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>Number</em>   The number of space to inclued the &lt;wbr&gt; after. </p></li><li><p><strong>return</strong>: <em>String</em>  The &lt;wbr&gt;'d string.</p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="class">String</span>.<span class="variable">prototype</span>.<span class="variable">wbr</span> = <span class="keyword">function</span>(<span class="variable">num</span>) {  
+  <span class="comment">// I borrowed this from Resig:  http://ejohn.org/blog/injecting-word-breaks-with-javascript/</span>
+   <span class="keyword">return</span> <span class="this">this</span>.<span class="variable">replace</span>(<span class="class">RegExp</span>(<span class="string">'(\\w{'</span> + <span class="variable">num</span> + <span class="string">'})(\\w)'</span>, <span class="string">'g'</span>), <span class="keyword">function</span>(<span class="variable">all</span>,<span class="variable">text</span>,<span class="variable">ch</span>){ 
+     <span class="keyword">return</span> <span class="variable">text</span> + <span class="string">'&lt;wbr&gt;'</span> + <span class="variable">ch</span>; 
+   }) 
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Bind click event to the button and call associated handler (bindAuthHandler).</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">bindAuthButton</span>()
+  {
+   <span class="variable">_storeRackspaceCreds</span>.<span class="variable">bind</span>(<span class="string">'click'</span>, <span class="keyword">function</span>(<span class="variable">e</span>){
+     <span class="keyword">if</span>( <span class="this">this</span>.<span class="variable">innerHTML</span> == <span class="string">'Authenticating...'</span>) <span class="keyword">return</span> <span class="variable">false</span>;
+     <span class="variable">bindAuthHandler</span>();
+   });
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Bind submit event to the authorization form and call subsequent handler.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">bindAuthFormSubmit</span>(){
+    $(<span class="string">'#rackspaceCredForm'</span>).<span class="variable">bind</span>(<span class="string">'submit'</span>, <span class="keyword">function</span>(<span class="variable">e</span>){
+      <span class="variable">bindAuthHandler</span>()
+      <span class="keyword">return</span> <span class="variable">false</span>
+    })
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Handler for the Authorization form. Grabs the values, does some weak validation and then calls the verifyUser network method.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">bindAuthHandler</span>(){
+    
+    <span class="keyword">var</span> <span class="variable">wrong</span> = <span class="variable">false</span>
+    
+    <span class="comment">// Handles the double submit on a styled anchor tag.</span>
+    <span class="keyword">if</span>( <span class="variable">_storeRackspaceCreds</span>.<span class="variable">text</span>() !== <span class="string">'Save Credentials'</span>) <span class="keyword">return</span> <span class="variable">false</span>
+
+    <span class="class">Gun</span>.<span class="variable">ui</span>.<span class="variable">toggleAuthButtonText</span>()
+    
+    <span class="comment">// Make sure they are not empty </span>
+    <span class="variable">_rackspaceInputs</span>.<span class="variable">each</span>(<span class="keyword">function</span>(){
+      <span class="keyword">var</span> <span class="variable">val</span> = $(<span class="this">this</span>).<span class="variable">val</span>();
+      <span class="keyword">if</span>(!<span class="variable">val</span>)
+      {
+        <span class="variable">wrong</span> = <span class="variable">true</span>
+        $(<span class="this">this</span>).<span class="variable">addClass</span>(<span class="string">'error'</span>)
+      }
+      <span class="keyword">else</span>
+      {
+        <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">set</span>(<span class="this">this</span>.<span class="variable">id</span>.<span class="variable">toLowerCase</span>(), <span class="variable">val</span>.<span class="variable">replace</span>(<span class="variable">_protocol</span>))
+      }
+    })
+    
+    <span class="keyword">if</span>(<span class="variable">wrong</span>)
+    {
+      <span class="keyword">var</span> <span class="variable">wrongHandler</span> = <span class="keyword">function</span>(){ $(<span class="string">'.error:first'</span>).<span class="variable">focus</span>() }
+      
+      <span class="class">Gun</span>.<span class="variable">ui</span>.<span class="variable">toggleAuthButtonText</span>()
+      
+      <span class="comment">// A tad bit of delay before we focus.</span>
+      <span class="variable">setTimeout</span>( <span class="variable">wrongHandler</span>, <span class="number integer">350</span>)
+      
+      <span class="class">Gun</span>
+       .<span class="variable">properties</span>
+         .<span class="variable">wipe</span>()
+    }
+    <span class="keyword">else</span>
+    {
+      <span class="class">Gun</span>.<span class="variable">network</span>.<span class="variable">setAuth</span>()
+    }
+
+    <span class="keyword">return</span> <span class="variable">false</span>;
+    
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Bind change event to select element that contains all the Rackspace containers.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">bindContainerList</span>()
+  {
+    <span class="variable">_container_list</span>.<span class="variable">chosen</span>().<span class="variable">change</span>(<span class="keyword">function</span>(<span class="variable">e</span>){
+      
+      <span class="comment">// Reset the inputs</span>
+      <span class="variable">resetDefaultAndCname</span>();
+      
+      <span class="comment">// Set the current container value after the change.</span>
+      <span class="variable">_currentContainer</span> = $(<span class="this">this</span>).<span class="variable">find</span>(<span class="string">'option:selected'</span>).<span class="variable">val</span>();
+
+      <span class="keyword">if</span>( <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'container'</span>) != <span class="variable">_currentContainer</span> ) 
+      {
+        $(<span class="string">'.default_container_wrapper, .container_cname_default'</span>).<span class="variable">slideDown</span>();
+      }
+      <span class="keyword">else</span>
+      {
+        $(<span class="string">'#default_container'</span>).<span class="variable">attr</span>(<span class="string">'checked'</span>,<span class="variable">true</span>)
+        <span class="variable">_container_cname</span>.<span class="variable">val</span>( <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'cname'</span>) );
+        
+      }
+    })
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Bind click event to the default container checkbox.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">bindDefaultContainerCheckbox</span>()
+  {
+    <span class="variable">_default_checkbox</span>.<span class="variable">bind</span>(<span class="string">'click'</span>, <span class="keyword">function</span>(<span class="variable">e</span>){
+      <span class="keyword">if</span>($(<span class="this">this</span>).<span class="variable">is</span>(<span class="string">':checked'</span>))
+      {
+        <span class="comment">// Make default</span>
+        <span class="keyword">var</span> <span class="variable">container</span> = <span class="variable">_container_list</span>.<span class="variable">find</span>(<span class="string">'option:selected'</span>).<span class="variable">val</span>();
+        <span class="keyword">var</span> <span class="variable">cname</span> = <span class="variable">_container_cname</span>[<span class="number integer">0</span>].<span class="variable">value</span> || <span class="string">''</span>;
+        
+        <span class="class">Gun</span>
+          .<span class="variable">properties</span>
+            .<span class="variable">set</span>(<span class="string">'cname'</span>, <span class="variable">cname</span>)
+            .<span class="variable">set</span>(<span class="string">'container'</span>, <span class="variable">container</span>)
+      }
+      <span class="keyword">else</span>
+      {
+        <span class="comment">// Remove default</span>
+        <span class="class">Gun</span>.<span class="variable">properties</span>
+          .<span class="variable">set</span>(<span class="string">'container'</span>,<span class="string">''</span>)
+          .<span class="variable">set</span>(<span class="string">'cname'</span>, <span class="string">''</span>)
+          
+        <span class="variable">resetDefaultAndCname</span>()
+      }
+    })
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Helper method to wipe the default checkbox and CNAME text field.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">resetDefaultAndCname</span>()
+  {
+    <span class="variable">_default_checkbox</span>.<span class="variable">removeAttr</span>(<span class="string">'checked'</span>)
+    <span class="variable">_container_cname</span>.<span class="variable">val</span>(<span class="string">''</span>)
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Bind blur event to the CNAME text input.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">bindCnameFieldBlur</span>()
+  {
+    <span class="variable">_container_cname</span>.<span class="variable">bind</span>(<span class="string">'blur'</span>, <span class="keyword">function</span>(){
+      <span class="comment">// Check to see it is not empty except when there is some already set</span>
+      <span class="comment">// meaning, the user is removing the cname to an empty string.</span>
+      <span class="keyword">if</span>(<span class="this">this</span>.<span class="variable">value</span> || <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'cname'</span>) )
+      {
+        <span class="keyword">var</span> <span class="variable">container</span> = <span class="variable">_container_list</span>.<span class="variable">find</span>(<span class="string">'option:selected'</span>).<span class="variable">val</span>()
+          , <span class="variable">cname</span> = <span class="this">this</span>.<span class="variable">value</span>.<span class="variable">replace</span>(<span class="variable">_protocol</span>, <span class="string">''</span>);
+        
+        <span class="class">Gun</span>
+          .<span class="variable">properties</span>
+            .<span class="variable">set</span>(<span class="string">'cname'</span>, <span class="variable">cname</span>)
+            .<span class="variable">set</span>(<span class="string">'container'</span>, <span class="variable">container</span>)
+        
+      }
+    })
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Bind focus and blur events to the authorization form inputs; show/hide tooltips.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">bindRackAuthInputs</span>()
+  {
+    <span class="keyword">var</span> <span class="variable">hasFocus</span> = <span class="variable">false</span>
+    
+    <span class="variable">_rackspaceInputs</span>.<span class="variable">bind</span>(<span class="string">'focus'</span>, <span class="keyword">function</span>(){
+      <span class="variable">hasFocus</span> = <span class="variable">true</span>
+      $(<span class="this">this</span>).<span class="variable">removeClass</span>(<span class="string">'error'</span>)
+      $(<span class="this">this</span>).<span class="variable">parent</span>().<span class="variable">find</span>(<span class="string">'.tip'</span>).<span class="variable">fadeIn</span>(<span class="number integer">200</span>)
+    })
+
+    <span class="variable">_rackspaceInputs</span>.<span class="variable">bind</span>(<span class="string">'blur'</span>, <span class="keyword">function</span>(){
+      <span class="variable">hasFocus</span> = <span class="variable">false</span>
+      $(<span class="this">this</span>).<span class="variable">parent</span>().<span class="variable">find</span>(<span class="string">'.tip'</span>).<span class="variable">fadeOut</span>(<span class="number integer">200</span>)
+    })
+
+    <span class="variable">_rackspaceInputs</span>.<span class="variable">bind</span>(<span class="string">'keyup'</span>, <span class="keyword">function</span>(<span class="variable">e</span>){
+      <span class="keyword">if</span>(<span class="variable">e</span>.<span class="variable">keyCode</span> == <span class="number integer">13</span> &<span class="variable">amp</span>;&<span class="variable">amp</span>; <span class="variable">hasFocus</span>){
+        <span class="variable">bindAuthHandler</span>()
+        $(<span class="this">this</span>).<span class="variable">blur</span>()
+        <span class="keyword">return</span> <span class="variable">false</span>
+      } 
+    })
+
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Creates the 'Account' menu item in the app's chrome; wires up the reset credentials event which also clears the form values.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">createResetCredsMenuItem</span>(){
+    <span class="keyword">var</span> <span class="variable">items</span> = [
+        {
+          <span class="variable">name</span>: <span class="string">'Reset Rackspace Credentials'</span>,
+          <span class="variable">handler</span>: <span class="keyword">function</span>(){
+            <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">wipe</span>(<span class="keyword">function</span>(){
+
+              <span class="comment">// Reset the fields' values.</span>
+              $(<span class="string">'#username, #apikey, #container_cname'</span>).<span class="variable">val</span>(<span class="string">''</span>)
+              
+              $(<span class="string">'#host'</span>).<span class="variable">val</span>(<span class="string">'auth.api.rackspacecloud.com'</span>)
+
+              $(<span class="string">'#default_container'</span>).<span class="variable">attr</span>(<span class="string">'checked'</span>,<span class="variable">false</span>)
+
+              <span class="comment">// Wrap up the activities in a simple function.</span>
+              <span class="keyword">var</span> <span class="variable">showAuthCb</span> = <span class="keyword">function</span>(){
+
+                $(<span class="string">'#container_list'</span>)
+                  .<span class="variable">find</span>(<span class="string">'option'</span>)
+                    .<span class="variable">remove</span>()
+                  .<span class="variable">end</span>()
+                  .<span class="variable">removeClass</span>(<span class="string">'chzn-done'</span>)
+
+                <span class="variable">_currentContainer</span> = <span class="string">''</span>;
+
+                <span class="comment">// Delete chosen dropdown.</span>
+                $(<span class="string">'#container_list_chzn'</span>).<span class="variable">remove</span>()
+
+                <span class="comment">// Apply focus to the first field.</span>
+                $(<span class="string">'#username'</span>).<span class="variable">focus</span>()
+                
+              }
+              
+              <span class="comment">// Show the Auth Form and fire callback.</span>
+              <span class="keyword">if</span>( !$(<span class="string">'.authform'</span>).<span class="variable">is</span>(<span class="string">':visible'</span>) ) <span class="class">Gun</span>.<span class="variable">ui</span>.<span class="variable">showAuthForm</span>( <span class="variable">showAuthCb</span> )
+              
+              <span class="variable">alert</span>(<span class="string">'Account information successfully reset!'</span>)
+              
+              
+            });
+          }
+        }
+      ]
+
+    <span class="class">Gun</span>.<span class="variable">menu</span>.<span class="variable">create</span>(<span class="string">'Account'</span>, <span class="variable">items</span>)
+
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Main initialization method for Gunnar.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">init</span>()
+  {
+    <span class="keyword">if</span>(!<span class="class">Ti</span>.<span class="class">Network</span>.<span class="variable">online</span>){
+      <span class="variable">alert</span>(<span class="string">'It appears you do not have internet connectivity. Gunnar needs the interwebz to work!'</span>)
+      <span class="keyword">return</span>
+    }
+    
+    <span class="class">Gun</span>.<span class="variable">spinner</span> = <span class="keyword">new</span> <span class="variable">spinnerModule</span>()
+    <span class="class">Gun</span>.<span class="variable">network</span> = <span class="keyword">new</span> <span class="variable">networkModule</span>()
+    <span class="class">Gun</span>.<span class="variable">filesystem</span> = <span class="keyword">new</span> <span class="variable">filesystemModule</span>()
+    
+    <span class="variable">yeahNo</span>()
+    <span class="variable">bindRackAuthInputs</span>()
+    <span class="variable">bindAuthFormSubmit</span>()
+    
+    <span class="keyword">var</span> <span class="variable">dragDropBodyOptions</span> = {
+          <span class="variable">element</span>: <span class="variable">w</span>,
+          <span class="variable">dragEnter</span>: <span class="keyword">function</span>(<span class="variable">e</span>)
+          {
+            <span class="comment">// We have to only allow the holder area to be droppable.</span>
+            <span class="keyword">if</span>(<span class="variable">e</span>.<span class="variable">target</span>.<span class="variable">id</span> == <span class="string">'holder'</span>)
+            {
+              <span class="variable">e</span>.<span class="variable">dataTransfer</span>.<span class="variable">dropEffect</span> = <span class="string">'copy'</span>;
+              <span class="variable">_holder</span>.<span class="variable">addClass</span>(<span class="string">'drag_enter'</span>)
+              <span class="variable">e</span>.<span class="variable">preventDefault</span>();
+              <span class="keyword">return</span> <span class="variable">false</span>;
+            }
+            <span class="keyword">else</span>
+            {
+              <span class="variable">e</span>.<span class="variable">dataTransfer</span>.<span class="variable">dropEffect</span> = <span class="string">'none'</span>;
+              <span class="variable">e</span>.<span class="variable">preventDefault</span>();
+              <span class="keyword">return</span> <span class="variable">false</span>;
+            }
+          },
+          <span class="variable">drop</span>: <span class="keyword">function</span>(<span class="variable">e</span>)
+          {
+            <span class="keyword">if</span>(<span class="variable">e</span>.<span class="variable">target</span>.<span class="variable">id</span> == <span class="string">'holder'</span>)
+            {
+              <span class="keyword">for</span> (<span class="keyword">var</span> <span class="variable">i</span> = <span class="number integer">0</span>; <span class="variable">i</span> &<span class="variable">lt</span>; <span class="variable">e</span>.<span class="variable">dataTransfer</span>.<span class="variable">files</span>.<span class="variable">length</span>; <span class="variable">i</span>++){
+                
+                (<span class="keyword">function</span>(<span class="variable">index</span>){
+                  <span class="keyword">var</span> <span class="variable">file</span> = <span class="variable">e</span>.<span class="variable">dataTransfer</span>.<span class="variable">files</span>[<span class="variable">i</span>]
+                  
+                  <span class="comment">// I'm leaving this code in here to show how we could use </span>
+                  <span class="comment">// the FileReader() api, but Mac OS X 10.6.8 and below don't</span>
+                  <span class="comment">// have the webkit that supports it.</span>
+                  
+                    <span class="comment">// , reader = new FileReader()</span>
+
+                    <span class="class">Gun</span>.<span class="variable">network</span>.<span class="variable">uploadFile</span>( <span class="variable">file</span> )
+
+                    
+                  <span class="comment">// reader.onload = function(e){</span>
+                  <span class="comment">//   Gun.network.uploadFile(file, e.target.result)</span>
+                  <span class="comment">// };</span>
+                  <span class="comment">// </span>
+                  <span class="comment">// reader.readAsBinaryString(file);</span>
+                  
+                })(<span class="variable">i</span>)                    
+              }
+
+              <span class="variable">_holder</span>.<span class="variable">css</span>(<span class="string">'backgroundImage'</span>, <span class="string">'url(\'</span>..<span class="regexp">/img/uploading</span><span class="variable">_bg</span>.<span class="variable">png</span>\<span class="string">')'</span>)
+              <span class="variable">_holder</span>.<span class="variable">removeClass</span>(<span class="string">'drag_enter'</span>)
+              <span class="variable">_holder</span>.<span class="variable">addClass</span>(<span class="string">'pulsate_out'</span>)
+
+              <span class="variable">setTimeout</span>(<span class="keyword">function</span>(){
+                <span class="variable">_holder</span>.<span class="variable">addClass</span>(<span class="string">'big_shadow'</span>)
+              },<span class="number integer">990</span>)
+
+              <span class="variable">e</span>.<span class="variable">preventDefault</span>()
+              <span class="keyword">return</span> <span class="variable">false</span>
+            }
+            <span class="keyword">else</span>
+            {
+              <span class="variable">e</span>.<span class="variable">preventDefault</span>()
+              <span class="keyword">return</span> <span class="variable">false</span>
+            }
+          }
+        }  
+
+    <span class="class">Gun</span>.<span class="variable">filesystem</span>.<span class="variable">dragDropFiles</span>(<span class="variable">dragDropBodyOptions</span>)
+
+
+    <span class="keyword">if</span>(!<span class="variable">isTitanium</span>)
+    {
+      <span class="comment">// TODO: Make hosted version?  Maybe when Rackspace has OAUTH</span>
+    }
+    <span class="keyword">else</span>
+    { 
+      
+      <span class="comment">// TODO: IMPLEMENT THIS. CURRENTLY DOES NOT WORK AS INTENDED</span>
+      <span class="comment">// Titanium.Network.addConnectivityListener(function(e){</span>
+      <span class="comment">//   alert('changed')</span>
+      <span class="comment">//   if(!Ti.Network.online){</span>
+      <span class="comment">//     alert('It appears you do not have internet connectivity. Gunnar needs the interwebz to work!')</span>
+      <span class="comment">//   }</span>
+      <span class="comment">// })</span>
+      
+      <span class="comment">// Listen for the close of the results window.</span>
+      <span class="variable">d</span>.<span class="variable">body</span>.<span class="variable">addEventListener</span>(<span class="class">Ti</span>.<span class="class">CLOSE</span>,<span class="keyword">function</span>(){
+        <span class="variable">_isResultsCreated</span> = <span class="variable">false</span>;
+      },<span class="variable">false</span>)
+      
+      <span class="comment">// Grab current window.</span>
+      <span class="variable">_curwin</span> = <span class="class">Ti</span>.<span class="class">UI</span>.<span class="variable">getCurrentWindow</span>()
+
+      <span class="comment">// Show Inspector</span>
+      <span class="variable">debug</span> &<span class="variable">amp</span>;&<span class="variable">amp</span>; <span class="variable">_curwin</span>.<span class="variable">showInspector</span>()
+
+
+      <span class="variable">console</span>.<span class="variable">log</span>( <span class="keyword">new</span> <span class="variable">uiModule</span>() )
+      <span class="class">Gun</span>.<span class="variable">ui</span> = <span class="keyword">new</span> <span class="variable">uiModule</span>()
+
+      <span class="comment">// Programmatically center the app.</span>
+      <span class="class">Gun</span>.<span class="variable">ui</span>.<span class="variable">centerApp</span>()
+      
+      <span class="variable">createResetCredsMenuItem</span>()
+      
+      <span class="keyword">if</span>(<span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">hasCredentials</span>())
+      {
+        <span class="class">Gun</span>.<span class="variable">ui</span>.<span class="variable">toggleAuthButtonText</span>()
+        <span class="class">Gun</span>.<span class="variable">network</span>.<span class="variable">setAuth</span>()
+      }
+      <span class="keyword">else</span>
+      {
+        
+        <span class="comment">// Possibly unnecessary...</span>
+        <span class="class">Gun</span>
+          .<span class="variable">properties</span>
+            .<span class="variable">wipe</span>()
+        
+        <span class="class">Gun</span>.<span class="variable">ui</span>.<span class="variable">showAuthForm</span>()
+        <span class="variable">bindAuthButton</span>()
+        
+      }
+    } <span class="comment">// end else</span>
+  } <span class="comment">// end init</span></code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<ul><li><p><strong>namespace</strong>: <em>uiModule</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">var</span> <span class="variable">uiModule</span> = <span class="keyword">function</span>(){
+    
+   <span class="comment">// </span>
+   <span class="comment">// Construct a new UI module.</span>
+   <span class="comment">// The UI module encapsulates various methods to position and transition between various views.</span>
+   <span class="comment">// </span>
+    
+    <span class="comment">// Should probably change these to be dynamic and not hardcoded.</span>
+    <span class="keyword">var</span> <span class="variable">_layout</span> = {
+      <span class="variable">width</span>: <span class="number integer">588</span>,
+      <span class="variable">height</span>: <span class="number integer">486</span>,
+      <span class="variable">padding</span>: <span class="number integer">8</span>
+    }
+    
+    <span class="keyword">function</span> <span class="variable">_getAppWidth</span>(){
+      <span class="keyword">return</span> <span class="variable">_curwin</span>.<span class="variable">getWidth</span>()
+    }
+    
+    <span class="keyword">function</span> <span class="variable">_getAppHeight</span>(){
+      <span class="keyword">return</span> <span class="variable">_curwin</span>.<span class="variable">getHeight</span>()
+    }
+    
+    <span class="keyword">function</span> <span class="variable">_getAppX</span>(){
+      <span class="keyword">return</span> <span class="variable">_curwin</span>.<span class="variable">getX</span>()
+    }
+
+    <span class="keyword">function</span> <span class="variable">_getAppY</span>(){
+      <span class="keyword">return</span> <span class="variable">_curwin</span>.<span class="variable">getY</span>()
+    }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<ul><li><p><strong>scope</strong>: <em>uiModule</em></p><p> </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">return</span> {</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Show the Main upload dashboard view by applying webkit-transition ready classes to particular elements and wiring up certain events.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p><p>   </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">showMainDashboard</span>: <span class="keyword">function</span>()
+      {
+        <span class="keyword">if</span>( <span class="variable">_results</span>.<span class="variable">is</span>(<span class="string">':visible'</span>) ) <span class="variable">_results</span>.<span class="variable">addClass</span>(<span class="string">'none'</span>)
+
+        <span class="variable">_init</span>.<span class="variable">removeClass</span>(<span class="string">'fadeIn'</span>)
+        <span class="variable">_init</span>.<span class="variable">addClass</span>(<span class="string">'fadeOut'</span>)
+
+        <span class="variable">_init</span>.<span class="variable">bind</span>(<span class="string">'webkitTransitionEnd'</span>, <span class="keyword">function</span>(<span class="variable">e</span>){
+
+          <span class="variable">_init</span>.<span class="variable">addClass</span>(<span class="string">'none'</span>)
+
+          <span class="variable">_desktop</span>.<span class="variable">removeClass</span>(<span class="string">'none'</span>)
+          <span class="variable">_desktop</span>.<span class="variable">removeClass</span>(<span class="string">'fadeOut'</span>)
+          <span class="variable">_desktop</span>.<span class="variable">addClass</span>(<span class="string">'fadeIn'</span>)
+
+          <span class="variable">bindContainerList</span>()
+
+          <span class="variable">bindDefaultContainerCheckbox</span>()
+
+          <span class="variable">bindCnameFieldBlur</span>()
+
+          <span class="comment">// Reset the text of the auth button.</span>
+          $(<span class="string">'#storeRackspaceCreds'</span>).<span class="variable">text</span>(<span class="string">'Save Credentials'</span>);
+
+        })
+      },</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Show the Authorization form by applying webkit-transition ready classes to particular elements.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>Function</em>  Optional callback</p></li><li><p><strong>return</strong>: <em>void</em></p><p>   </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">showAuthForm</span>: <span class="keyword">function</span>(<span class="variable">cb</span>){
+        <span class="keyword">if</span>( <span class="variable">_desktop</span>.<span class="variable">is</span>(<span class="string">':visible'</span>) )
+        {
+          <span class="variable">_desktop</span>.<span class="variable">removeClass</span>(<span class="string">'fadeIn'</span>).<span class="variable">addClass</span>(<span class="string">'fadeOut'</span>)
+
+          <span class="variable">_desktop</span>.<span class="variable">bind</span>(<span class="string">'webkitTransitionEnd'</span>, <span class="keyword">function</span>(){
+
+              <span class="variable">_desktop</span>.<span class="variable">addClass</span>(<span class="string">'none'</span>)
+              
+              <span class="comment">// Can't chain here...</span>
+              <span class="variable">_form</span>.<span class="variable">removeClass</span>(<span class="string">'fadeOut'</span>)
+              <span class="variable">_form</span>.<span class="variable">removeClass</span>(<span class="string">'none'</span>)
+              <span class="variable">_form</span>.<span class="variable">addClass</span>(<span class="string">'visible'</span>)
+              <span class="variable">_form</span>.<span class="variable">addClass</span>(<span class="string">'fadeIn'</span>);
+
+              <span class="variable">_form</span>.<span class="variable">bind</span>(<span class="string">'webkitTransitionEnd'</span>, <span class="keyword">function</span>(){
+                <span class="variable">_form</span>.<span class="variable">unbind</span>(<span class="string">'webkitTransitionEnd'</span>)
+              })
+          }) <span class="comment">// end webkitTransitionEnd</span>
+          <span class="variable">bindAuthButton</span>()
+          
+          <span class="variable">cb</span> &<span class="variable">amp</span>;&<span class="variable">amp</span>; <span class="variable">cb</span>()
+        }
+      }, <span class="comment">// end showAuthForm</span></code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Programmatically set the app's window height.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p><p>   </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">setWindowHeight</span>: <span class="keyword">function</span>(){
+        <span class="variable">_curwin</span>.<span class="variable">setHeight</span>(<span class="variable">screen</span>.<span class="variable">height</span>-<span class="number integer">48</span>);
+      },</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Programmatically center the app on the screen.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p><p>   </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">centerApp</span>: <span class="keyword">function</span>(){
+        <span class="variable">_curwin</span>.<span class="variable">setX</span>( (<span class="variable">screen</span>.<span class="regexp">/2) - (_layout.width/</span><span class="number integer">2</span>) ) <span class="comment">// 588 and 486 defined in tiapp.xml</span>
+        <span class="variable">_curwin</span>.<span class="variable">setY</span>( (<span class="variable">screen</span>.<span class="regexp">/2) - (_layout.height/</span><span class="number integer">2</span>) ) <span class="comment">// could probably set programmatically, but I'm lazy</span>
+      },</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Shows the results window and positions it accordingly.  Appends a filelink to results list.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p><p>   </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">createResultsWindow</span>: <span class="keyword">function</span>(<span class="variable">filelink</span>){
+       
+        <span class="keyword">var</span> <span class="variable">appW</span> = <span class="variable">_getAppWidth</span>()
+          , <span class="variable">appH</span> = <span class="variable">_getAppHeight</span>()
+          , <span class="variable">appX</span> = <span class="variable">_getAppX</span>()
+          , <span class="variable">appY</span> = <span class="variable">_getAppY</span>()
+        
+        <span class="comment">// console.log('appW: ' + appW)</span>
+        <span class="comment">// console.log('appH: ' + appH)</span>
+        <span class="comment">// console.log('appX: ' + appX)</span>
+        <span class="comment">// console.log('appY: ' + appY)</span>
+        <span class="comment">// console.log('screen.width: ' + screen.width)</span>
+        <span class="comment">// console.log('screen.height: ' + screen.height)</span>
+       
+         <span class="keyword">var</span> <span class="variable">xCoord</span> = ( <span class="variable">appX</span> + (<span class="variable">appW</span>*<span class="number integer">2</span>) ) &<span class="variable">gt</span>; <span class="variable">screen</span>.<span class="variable">width</span> 
+                        ? ( <span class="variable">appX</span> - <span class="variable">appW</span> + <span class="number integer">200</span> - <span class="variable">_layout</span>.<span class="variable">padding</span> )
+                        : ( <span class="variable">appX</span> + <span class="variable">appW</span> + <span class="variable">_layout</span>.<span class="variable">padding</span> )
+      
+         <span class="keyword">var</span> <span class="variable">yCoord</span> = ( <span class="variable">appY</span> + <span class="variable">appH</span> ) &<span class="variable">gt</span>; <span class="variable">screen</span>.<span class="variable">height</span> 
+                        ? ( <span class="variable">appY</span> - <span class="variable">appH</span> )
+                        : ( <span class="variable">appY</span> )
+
+         <span class="comment">// TODO: add this to the tiapp.xml</span>
+         <span class="variable">_resultsWindow</span> = <span class="class">Titanium</span>.<span class="class">UI</span>.<span class="variable">createWindow</span>({
+                 <span class="variable">id</span>: <span class="string">'resultsWindow'</span>,
+                 <span class="variable">url</span>: <span class="string">'app://results.html'</span>,
+                 <span class="variable">x</span>: <span class="variable">xCoord</span>,
+                 <span class="variable">y</span>: <span class="variable">yCoord</span>,
+                 <span class="variable">width</span>: <span class="variable">appW</span> - <span class="number integer">200</span>,
+                 <span class="variable">minWidth</span>: <span class="variable">appW</span> - <span class="number integer">200</span>,
+                 <span class="variable">maxWidth</span>: <span class="variable">appW</span> - <span class="number integer">200</span>,
+                 <span class="variable">height</span>: <span class="variable">appH</span>,
+                 <span class="variable">minHeight</span>: <span class="variable">appH</span>,
+                 <span class="variable">maxHeight</span>: <span class="variable">screen</span>.<span class="variable">height</span>,
+                 <span class="variable">maximizable</span>: <span class="variable">false</span>,
+                 <span class="variable">minimizable</span>: <span class="variable">true</span>,
+                 <span class="variable">closeable</span>: <span class="variable">true</span>,
+                 <span class="variable">resizable</span>: <span class="variable">true</span>,
+                 <span class="variable">visible</span>: <span class="variable">true</span>,
+                 <span class="variable">transparency</span>: <span class="variable">true</span>
+             });
+        
+        <span class="comment">// On load...</span>
+        <span class="variable">_resultsWindow</span>.<span class="variable">addEventListener</span>(<span class="class">Ti</span>.<span class="class">PAGE_INITIALIZED</span>,<span class="keyword">function</span>(){
+          
+          <span class="comment">// Set the dom fo the results window for access later.</span>
+          <span class="variable">_resultsDom</span> = <span class="variable">_resultsWindow</span>.<span class="variable">getDOMWindow</span>();
+        
+          $(<span class="variable">_resultsDom</span>.<span class="variable">document</span>.<span class="variable">body</span>)
+            .<span class="variable">find</span>(<span class="string">'.fixed_bottom'</span>)
+              .<span class="variable">after</span>(<span class="variable">filelink</span>)
+          
+          <span class="comment">// So we don't keep creating the results window.    </span>
+          <span class="comment">// TODO: Fix.  This is a problem when drag/drop multiple files.</span>
+          <span class="comment">// Causes a race condition/create multiple results windows.</span>
+          <span class="variable">_isResultsCreated</span> = <span class="variable">true</span>;
+        
+        },<span class="variable">false</span>)
+        
+        <span class="comment">// Listen for the close of the results window.</span>
+        <span class="variable">_resultsWindow</span>.<span class="variable">addEventListener</span>(<span class="class">Ti</span>.<span class="class">CLOSE</span>,<span class="keyword">function</span>(){
+          <span class="variable">_isResultsCreated</span> = <span class="variable">false</span>;
+        },<span class="variable">false</span>)
+        
+        <span class="variable">_resultsWindow</span>.<span class="variable">open</span>();
+        
+      },</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Updates the results list in the Results window.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p><p>   </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">updateResultsWindow</span>: <span class="keyword">function</span>(<span class="variable">filelink</span>){
+        $(<span class="variable">_resultsDom</span>.<span class="variable">document</span>.<span class="variable">body</span>)
+          .<span class="variable">find</span>(<span class="string">'.fixed_bottom'</span>)
+            .<span class="variable">after</span>(<span class="variable">filelink</span>)
+      },</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Toggles the value of the authorization button text.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p><p>   </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">toggleAuthButtonText</span>: <span class="keyword">function</span>(){
+        <span class="variable">_storeRackspaceCreds</span>.<span class="variable">text</span>( <span class="variable">_storeRackspaceCreds</span>.<span class="variable">text</span>() == <span class="string">'Authenticating...'</span> 
+                                    ? <span class="string">'Save Credentials'</span> 
+                                    : <span class="string">'Authenticating...'</span> )
+      },</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Helper method for hiding/showing the mini-spinner on the container list view.</p>
+
+<h2>NOTE AS OF v0.0.1, THIS IS NOT USED, BUT MAY BE USED IN THE FUTURE.</h2>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p><p>   </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">toggleMiniSpinner</span>: <span class="keyword">function</span>(){
+        <span class="variable">_spinner_copy</span>.<span class="variable">hasClass</span>(<span class="string">'fadeIn'</span>) ? <span class="variable">_spinner_copy</span>.<span class="variable">removeClass</span>(<span class="string">'fadeIn'</span>) : <span class="variable">_spinner_copy</span>.<span class="variable">addClass</span>(<span class="string">'fadeIn'</span>)
+      }               
+    }
+  }
+  
+  <span class="variable">init</span>()
+
+  
+}) <span class="comment">// end DOM READY</span>
+</code></pre>
+</td>
+</tr><tr class="filename"><td><h2 id="public/js/filesystem.js"><a href="#">filesystem</a></h2></td><td>public/js/filesystem.js</td></tr><tr class="code">
+<td class="docs">
+<p>File System Module
+Methods and properties associated file I/O.</p>
+
+<p> </p>
+</td>
+<td class="code">
+
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<ul><li><p><strong>namespace</strong>: <em>filesystemModule</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">var</span> <span class="variable">filesystemModule</span> = <span class="keyword">function</span>(){</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<ul><li><p><strong>scope</strong>: <em>filesystemModule</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">return</span> {</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Wires up the drag/drop area area.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>Object</em>  Options hash including the element to bind and the associated handlers.</p></li><li><p><strong>return</strong>: <em>void</em></p><p> </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">dragDropFiles</span>: <span class="keyword">function</span>(<span class="variable">options</span>)
+    {
+      <span class="keyword">var</span> <span class="variable">_el</span> = <span class="variable">options</span>.<span class="variable">element</span>
+        , <span class="variable">_dragEnter</span> = <span class="variable">options</span>.<span class="variable">dragEnter</span>
+        , <span class="variable">_drop</span> = <span class="variable">options</span>.<span class="variable">drop</span>
+
+      <span class="variable">_el</span>.<span class="variable">ondragover</span> = <span class="variable">_el</span>.<span class="variable">ondragenter</span> = <span class="variable">_dragEnter</span>;
+      <span class="variable">_el</span>.<span class="variable">ondrop</span> = <span class="variable">_drop</span>;
+    },</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Event handler for used for the "Pick a file and upload" button. Opens the file chooser dialog and uploads the file(s).</p>
+
+<h2>NOTE THE ACTUAL BUTTON WAS REMOVED BUT COULD EASILY BE ADDED BACK IN.</h2>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p><p> </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">browseForFile</span>: <span class="keyword">function</span>()
+    { 
+
+      <span class="comment">// Browse file and upload it as callback.</span>
+      <span class="variable">_curwin</span>.<span class="variable">openFileChooserDialog</span>(<span class="keyword">function</span>(<span class="variable">files</span>){ 
+
+          <span class="keyword">if</span>(!<span class="variable">files</span>.<span class="variable">length</span>) <span class="keyword">return</span> <span class="variable">false</span>;
+
+          <span class="class">Gun</span>.<span class="variable">network</span>.<span class="variable">uploadFile</span>( <span class="class">Ti</span>.<span class="class">Filesystem</span>.<span class="variable">getFile</span>(<span class="variable">files</span>[<span class="number integer">0</span>]) )
+
+          <span class="comment">//files.forEach( function(el,i){ Gun.network.uploadFile( Ti.Filesystem.getFile(el.path) ) } ) </span>
+
+      }); 
+    }
+    
+  }
+  
+}
+</code></pre>
+</td>
+</tr><tr class="filename"><td><h2 id="public/js/menu.js"><a href="#">menu</a></h2></td><td>public/js/menu.js</td></tr><tr class="code">
+<td class="docs">
+<p>Methods that work with the Titanium Application's application Menu capabilities.</p>
+
+<p> </p>
+</td>
+<td class="code">
+
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Creates a new menu and adds the items to the menu along with the items associated callbacks.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>String</em>  The name of the menu.</p></li><li><p><strong>param</strong>: <em>Array</em>  An array of objects containg the menu item name {String} and the callback {Function} associated</p></li></ul>
+
+<p>with the menu item.
+ - <strong>return</strong>: <em>current</em>
+ 'this' value (chainable)
+ </p>
+</td>
+<td class="code">
+<pre><code><span class="class">Gun</span>.<span class="variable">menu</span>.<span class="variable">create</span> = <span class="keyword">function</span>(<span class="variable">menuName</span>, <span class="variable">items</span>){
+  
+  <span class="keyword">var</span> <span class="variable">menu</span> = <span class="class">Titanium</span>.<span class="class">UI</span>.<span class="variable">createMenu</span>();
+  <span class="keyword">var</span> <span class="variable">toplevelItem</span> = <span class="class">Titanium</span>.<span class="class">UI</span>.<span class="variable">createMenuItem</span>(<span class="variable">menuName</span>);
+  
+  <span class="comment">// Add each item to the newly created menu and its handler</span>
+  <span class="variable">items</span>.<span class="variable">forEach</span>(<span class="keyword">function</span>(<span class="variable">el</span>,<span class="variable">i</span>){
+    <span class="variable">toplevelItem</span>.<span class="variable">addItem</span>(<span class="variable">items</span>[<span class="variable">i</span>].<span class="variable">name</span>, <span class="variable">items</span>[<span class="variable">i</span>].<span class="variable">handler</span>)
+  })
+
+  <span class="comment">// Append the new top level menu to the rest menubar</span>
+  <span class="variable">menu</span>.<span class="variable">appendItem</span>(<span class="variable">toplevelItem</span>);
+  <span class="class">Titanium</span>.<span class="class">UI</span>.<span class="variable">setMenu</span>(<span class="variable">menu</span>);
+  
+  <span class="keyword">return</span> <span class="this">this</span>;
+}</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Binds a click event to a menu's item.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>String</em>  The name of the menu.</p></li><li><p><strong>param</strong>: <em>String</em>  The name of the menu item.</p></li><li><p><strong>param</strong>: <em>Function</em>  The handler to be bound to the menu item.</p></li><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="class">Gun</span>.<span class="variable">menu</span>.<span class="variable">wireItem</span> = <span class="keyword">function</span>(<span class="variable">menu</span>, <span class="variable">item</span>, <span class="variable">callback</span>){
+  <span class="variable">item</span>.<span class="variable">click</span>(<span class="variable">callback</span>)
+}</code></pre>
+</td>
+</tr><tr class="filename"><td><h2 id="public/js/network.js"><a href="#">network</a></h2></td><td>public/js/network.js</td></tr><tr class="code">
+<td class="docs">
+<p>Network Module
+Methods and properties associated with network communication over HTTP.</p>
+
+<p> </p>
+</td>
+<td class="code">
+
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<ul><li><p><strong>namespace</strong>: <em>networkModule</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">var</span> <span class="variable">networkModule</span> = <span class="keyword">function</span>(){
+  
+  <span class="keyword">var</span> <span class="variable">_host</span> = <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'host'</span>) || <span class="string">'auth.api.rackspacecloud.com'</span>
+    , <span class="variable">_username</span> = <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'username'</span>) 
+    , <span class="variable">_apikey</span> = <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'apikey'</span>)
+    , <span class="variable">_httpClient</span>  = <span class="class">Ti</span>.<span class="class">Network</span>.<span class="variable">createHTTPClient</span>()
+    , <span class="variable">_results</span> = $(<span class="string">'.results'</span>)
+    , <span class="variable">_container_list</span> = $(<span class="string">'#container_list'</span>)</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Method iterates through an object and sets the key and its value as a request header for
+an HTTPClient or XHR instance.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>HTTPClient Object</em>  An instance of a Titanium HTTPClient Object or XHR.</p></li><li><p><strong>param</strong>: <em>Object</em>  An object hash of header types and their values.</p></li><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">_setHeaders</span>(<span class="variable">client</span>, <span class="variable">headers</span>){ 
+    <span class="keyword">for</span>(<span class="keyword">var</span> <span class="variable">key</span> <span class="keyword">in</span> <span class="variable">headers</span>){ 
+      <span class="comment">// Ti.API.debug(key + ' is the key')</span>
+      <span class="comment">// Ti.API.debug(headers[key] + ' is the value')</span>
+      <span class="variable">client</span>.<span class="variable">setRequestHeader</span>(<span class="variable">key</span>, <span class="variable">headers</span>[<span class="variable">key</span>]) 
+      
+    } 
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Handler for the setAuth method call.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>Error</em>  An error object if there was an error; null if not.</p></li><li><p><strong>param</strong>: <em>Object</em>  A JSON object.</p></li><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">_setAuthHandler</span>(<span class="variable">err</span>,<span class="variable">data</span>,<span class="variable">client</span>){
+    
+   <span class="keyword">try</span>{
+     <span class="keyword">if</span>(<span class="variable">err</span>)
+     {
+       <span class="class">Gun</span>
+         .<span class="variable">spinner</span>
+           .<span class="variable">hideOverlaySpinner</span>(<span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">wipe</span>)
+  
+           <span class="variable">alert</span>(<span class="string">'Error in transmission:'</span> + <span class="variable">err</span>)
+  
+           <span class="class">Gun</span>.<span class="variable">ui</span>.<span class="variable">toggleAuthButtonText</span>()
+           <span class="variable">_rackspaceInputs</span>.<span class="variable">removeAttr</span>(<span class="string">'disabled'</span>)
+           <span class="keyword">return</span> <span class="variable">false</span>
+     }
+     <span class="keyword">else</span>
+     {
+       <span class="keyword">if</span>(<span class="variable">data</span>.<span class="variable">status</span> === <span class="number integer">401</span>) <span class="comment">// unauthorized...</span>
+       {
+         <span class="class">Gun</span>
+           .<span class="variable">spinner</span>
+             .<span class="variable">hideOverlaySpinner</span>(<span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">wipe</span>)
+
+         <span class="variable">alert</span>(<span class="string">'Unable to authenticate: '</span> + <span class="variable">data</span>.<span class="variable">responseText</span>)
+             
+         <span class="keyword">if</span>( <span class="regexp">/bad/i</span>.<span class="variable">test</span>(<span class="variable">data</span>.<span class="variable">responseText</span>) ) $(<span class="string">'#username'</span>).<span class="variable">focus</span>()
+         <span class="keyword">else</span> $(<span class="string">'#host'</span>).<span class="variable">focus</span>()
+         
+         <span class="class">Gun</span>.<span class="variable">ui</span>.<span class="variable">toggleAuthButtonText</span>()
+         <span class="variable">_rackspaceInputs</span>.<span class="variable">removeAttr</span>(<span class="string">'disabled'</span>)
+         
+         <span class="keyword">return</span> <span class="variable">false</span>
+       }
+       <span class="keyword">else</span>
+       {
+         <span class="comment">// Could probably be optimized with a forEach with client.getResponseHeaders()</span>
+         <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">set</span>(<span class="string">'authorized'</span>,<span class="string">'true'</span>)
+         <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">set</span>(<span class="string">'serverUrl'</span>,<span class="variable">client</span>.<span class="variable">getResponseHeader</span>(<span class="string">'x-server-management-url'</span>))
+         <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">set</span>(<span class="string">'storageUrl'</span>,<span class="variable">client</span>.<span class="variable">getResponseHeader</span>(<span class="string">'x-storage-url'</span>))
+         <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">set</span>(<span class="string">'cdnUrl'</span>,<span class="variable">client</span>.<span class="variable">getResponseHeader</span>(<span class="string">'x-cdn-management-url'</span>))
+         <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">set</span>(<span class="string">'authToken'</span>,<span class="variable">client</span>.<span class="variable">getResponseHeader</span>(<span class="string">'x-auth-token'</span>))
+         <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">set</span>(<span class="string">'storageToken'</span>,<span class="variable">client</span>.<span class="variable">getResponseHeader</span>(<span class="string">'x-storage-token'</span>))
+
+         <span class="comment">// Let's the get the containers...</span>
+         <span class="class">Gun</span>.<span class="variable">network</span>.<span class="variable">getContainers</span>()
+        
+       }
+     }
+     
+   }<span class="keyword">catch</span>(<span class="variable">e</span>){
+     <span class="class">Gun</span>
+       .<span class="variable">spinner</span>
+         .<span class="variable">hideOverlaySpinner</span>(<span class="keyword">function</span>(){
+           <span class="variable">alert</span>(<span class="string">'Error in transmission: \n\n'</span> + <span class="variable">e</span>)
+           <span class="class">Gun</span>.<span class="variable">ui</span>.<span class="variable">toggleAuthButtonText</span>()
+         })
+   }
+
+  } <span class="comment">// end _setAuthHandler</span></code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Obtains either the cname or the CDN URL for a particular container.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>String</em>  The name of the container.</p></li><li><p><strong>return</strong>: <em>String</em> </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">_getContainterCdnUrl</span>(<span class="variable">container</span>){
+    
+    <span class="keyword">if</span> ($(<span class="string">'#container_cname'</span>).<span class="variable">val</span>()) <span class="keyword">return</span> <span class="string">'http://'</span> + $(<span class="string">'#container_cname'</span>).<span class="variable">val</span>()
+    <span class="keyword">else</span>{
+      <span class="keyword">var</span> <span class="variable">allContainers</span> = <span class="class">JSON</span>.<span class="variable">parse</span>(<span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'containers'</span>))
+      
+        <span class="keyword">var</span> <span class="variable">currentContainer</span> = <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'container'</span>)
+          , <span class="variable">uri</span> = <span class="string">''</span>
+      
+        <span class="variable">allContainers</span>.<span class="variable">forEach</span>(<span class="keyword">function</span>(<span class="variable">el</span>,<span class="variable">i</span>){
+          <span class="keyword">if</span>( <span class="variable">el</span>.<span class="variable">name</span> == <span class="variable">currentContainer</span> ) <span class="variable">uri</span> = <span class="variable">el</span>.<span class="variable">cdn_uri</span>;
+        })
+        
+        <span class="keyword">return</span> <span class="variable">uri</span>;
+    }
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Handler for the getContainers method call.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>Error</em>  An error object if there was an error; null if not.</p></li><li><p><strong>param</strong>: <em>Object</em>  A JSON object of data.</p></li><li><p><strong>param</strong>: <em>HTTPClient Object</em>  An HTTPClient Instance.</p></li><li><p><strong>param</strong>: <em>Function</em>  An optional callback.</p></li><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">_getContainersHandler</span>(<span class="variable">err</span>,<span class="variable">data</span>,<span class="variable">client</span>,<span class="variable">cb</span>){
+    
+    <span class="variable">_rackspaceInputs</span>.<span class="variable">removeAttr</span>(<span class="string">'disabled'</span>)
+    
+    <span class="keyword">try</span>{
+      <span class="keyword">var</span> <span class="variable">resp</span> = <span class="class">JSON</span>.<span class="variable">parse</span>(<span class="variable">data</span>.<span class="variable">responseText</span>);
+
+        <span class="keyword">if</span>(<span class="variable">err</span>)
+        {
+          <span class="variable">alert</span>(<span class="string">'Error: '</span> + <span class="variable">err</span>.<span class="variable">message</span>)
+          <span class="comment">// Gun.ui.toggleMiniSpinner() --&gt; Currently not used.</span>
+
+          $(<span class="string">'.desktop'</span>)
+            .<span class="variable">parent</span>()
+            .<span class="variable">append</span>(<span class="string">'&lt;p class=&quot;unable_frown&quot;&gt;Gunnar is unable to fetch your container from '</span>+
+                    <span class="string">'Rackspace.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;span frown&gt;:(&lt;/span&gt;&lt;/p&gt;'</span>)
+            .<span class="variable">end</span>()
+            .<span class="variable">hide</span>()
+
+            <span class="comment">// Reset the text of the auth button.</span>
+            <span class="class">Gun</span>.<span class="variable">ui</span>.<span class="variable">toggleAuthButtonText</span>()
+
+        }
+        <span class="keyword">else</span>
+        {
+            <span class="comment">// Gun.ui.toggleMiniSpinner() -&gt; No longer used.</span>
+
+            <span class="comment">// Stash all containers. May not be necessary, but so we have them.</span>
+            <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">set</span>(<span class="string">'containers'</span>, <span class="class">JSON</span>.<span class="variable">stringify</span>(<span class="variable">resp</span>))
+
+            <span class="keyword">var</span> <span class="variable">list</span> = <span class="string">''</span>
+            <span class="variable">resp</span>.<span class="variable">forEach</span>(<span class="keyword">function</span>(<span class="variable">el</span>,<span class="variable">i</span>){
+
+              <span class="comment">// Check for default container (we fetched this data during init)</span>
+              <span class="keyword">if</span>(<span class="variable">el</span>.<span class="variable">name</span> === <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'container'</span>))
+              {
+                <span class="variable">list</span> += <span class="string">'&lt;option selected=&quot;true&quot; value=&quot;'</span>+<span class="variable">el</span>.<span class="variable">name</span>+<span class="string">'&quot;&gt;'</span>+<span class="variable">el</span>.<span class="variable">name</span>+<span class="string">'&lt;/option&gt;'</span>
+                
+                $(<span class="string">'#default_container'</span>).<span class="variable">attr</span>(<span class="string">'checked'</span>,<span class="variable">true</span>)
+                $(<span class="string">'#container_cname'</span>).<span class="variable">val</span>( <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'cname'</span>) );
+                
+                <span class="variable">_currentContainer</span> = <span class="variable">el</span>.<span class="variable">name</span>
+
+                <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">set</span>(<span class="string">'uploadUrl'</span>, <span class="variable">el</span>.<span class="variable">cdn_uri</span>)
+
+              }
+              <span class="keyword">else</span>
+              {
+                <span class="variable">list</span> += <span class="string">'&lt;option value=&quot;'</span>+<span class="variable">el</span>.<span class="variable">name</span>+<span class="string">'&quot;&gt;'</span>+<span class="variable">el</span>.<span class="variable">name</span>+<span class="string">'&lt;/option&gt;'</span>   
+                <span class="comment">// If the _currentContainer is set, let's keep it, otherwise just set to the</span>
+                <span class="comment">// first item  (this could certainly be improved...not really efficient)</span>
+                <span class="variable">_currentContainer</span> = <span class="variable">_currentContainer</span> || <span class="variable">resp</span>[<span class="number integer">0</span>].<span class="variable">name</span>;
+              }
+
+            }) <span class="comment">// end forEach</span>
+
+            <span class="variable">_container_list</span>
+              .<span class="variable">children</span>()
+                .<span class="variable">remove</span>()
+              .<span class="variable">end</span>()
+              .<span class="variable">append</span>(<span class="variable">list</span>)        
+              
+              <span class="comment">// Make drop down pretty</span>
+              <span class="variable">_container_list</span>.<span class="variable">chosen</span>()
+              
+              <span class="comment">// So the checkbox is on the right of the box</span>
+              <span class="comment">// Shitty hax to work with 'chosen' jQuery plugin...</span>
+              $(<span class="string">'#container_list_chzn'</span>).<span class="variable">css</span>(<span class="string">'float'</span>, <span class="string">'left'</span>)
+              $(<span class="string">'#container_list_chzn'</span>).<span class="variable">width</span>( $(<span class="string">'#container_list_chzn'</span>).<span class="variable">width</span>() + <span class="number integer">2</span> )
+              $(<span class="string">'.chzn-search input'</span>).<span class="variable">width</span>( $(<span class="string">'#container_list_chzn'</span>).<span class="variable">width</span>() - <span class="number integer">20</span> )
+              
+              <span class="class">Gun</span>
+                .<span class="variable">spinner</span>
+                  .<span class="variable">hideOverlaySpinner</span>(<span class="class">Gun</span>.<span class="variable">ui</span>.<span class="variable">showMainDashboard</span>)
+              
+                    
+        } <span class="comment">// end length &gt; 0        </span>
+        
+      
+    }
+    <span class="keyword">catch</span>(<span class="variable">e</span>){
+      <span class="variable">alert</span>(<span class="variable">e</span>.<span class="variable">message</span>)
+    }
+    
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Handler for the getContainer method call.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>Error</em>  An error object if there was an error; null if not.</p></li><li><p><strong>param</strong>: <em>Object</em>  A JSON object.</p></li><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">_getContainerHandler</span>(<span class="variable">err</span>,<span class="variable">data</span>,<span class="variable">client</span>,<span class="variable">cb</span>){
+    
+    <span class="keyword">var</span> <span class="variable">resp</span> = <span class="class">JSON</span>.<span class="variable">parse</span>(<span class="variable">data</span>.<span class="variable">responseText</span>)
+    
+      <span class="keyword">if</span>(<span class="variable">err</span>)
+      {
+        <span class="variable">alert</span>(<span class="string">'error'</span>)
+        <span class="comment">// Gun.ui.toggleMiniSpinner() -&gt; No longer used.</span>
+        
+        $(<span class="string">'.desktop'</span>)
+          .<span class="variable">parent</span>()
+            .<span class="variable">append</span>(<span class="string">'&lt;p class=&quot;unable_frown&quot;&gt;Gunnar is unable to fetch your container from '</span>+
+                    <span class="string">'Rackspace.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;span frown&gt;:(&lt;/span&gt;&lt;/p&gt;'</span>)
+          .<span class="variable">end</span>()
+          .<span class="variable">hide</span>() 
+
+          $(<span class="string">'.upload'</span>).<span class="variable">css</span>(<span class="string">'display'</span>, <span class="string">'none'</span>);
+
+      }
+      <span class="keyword">else</span>
+      {
+        <span class="comment">// console.log('response from get container: ')</span>
+        <span class="comment">// console.log(data)</span>
+        <span class="comment">// console.log('\n\n\n' +data.cdnUri+ '\n\n\n')</span>
+        <span class="variable">cb</span> &<span class="variable">amp</span>;&<span class="variable">amp</span>; <span class="variable">cb</span>(<span class="keyword">null</span>,<span class="variable">data</span>)
+      } <span class="comment">// end length &gt; 0        </span>
+    
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Handler for the uploadFile method call.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>Error</em>  An error object if there was an error; null if not.</p></li><li><p><strong>param</strong>: <em>Object</em>  A JSON object.</p></li><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">_uploadFileHandler</span>(<span class="variable">err</span>,<span class="variable">data</span>){
+    
+      <span class="keyword">if</span>(<span class="variable">err</span>){
+        <span class="variable">alert</span>(<span class="string">'There was an issue uploading: '</span> + <span class="variable">err</span>.<span class="variable">message</span>)
+      }
+      <span class="keyword">else</span>{
+        
+        <span class="comment">// Get the current uploadUrl</span>
+        <span class="keyword">var</span> <span class="variable">cdnUri</span> = <span class="variable">_getContainterCdnUrl</span>( <span class="variable">_currentContainer</span> || <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'container'</span>)  )
+          , <span class="variable">filename</span> = <span class="variable">data</span>.<span class="variable">filename</span>
+          , <span class="variable">fileLink</span> = <span class="variable">cdnUri</span> + <span class="string">'/'</span> + <span class="variable">filename</span>
+          
+         $(<span class="string">'#holder'</span>)
+          .<span class="variable">removeClass</span>(<span class="string">'pulsate_out'</span>)
+          .<span class="variable">removeClass</span>(<span class="string">'big_shadow'</span>)
+
+         <span class="variable">setTimeout</span>(<span class="keyword">function</span>(){
+           
+           $(<span class="variable">holder</span>).<span class="variable">css</span>(<span class="string">'backgroundImage'</span>, <span class="string">'url(&quot;../img/drag_bg.png&quot;)'</span>)
+          
+           <span class="variable">_isResultsCreated</span> 
+            ? <span class="class">Gun</span>.<span class="variable">ui</span>.<span class="variable">updateResultsWindow</span>(<span class="string">'&lt;p&gt;&lt;a target=&quot;_blank&quot; href=&quot;'</span>+<span class="variable">fileLink</span>+<span class="string">'&quot;&gt;'</span>+<span class="variable">fileLink</span>.<span class="variable">wbr</span>(<span class="number integer">7</span>)+<span class="string">'&lt;/a&gt;&lt;/p&gt;'</span>) 
+            : <span class="class">Gun</span>.<span class="variable">ui</span>.<span class="variable">createResultsWindow</span>(<span class="string">'&lt;p&gt;&lt;a target=&quot;_blank&quot; href=&quot;'</span>+<span class="variable">fileLink</span>+<span class="string">'&quot;&gt;'</span>+<span class="variable">fileLink</span>.<span class="variable">wbr</span>(<span class="number integer">7</span>)+<span class="string">'&lt;/a&gt;&lt;/p&gt;'</span>)
+         
+         },<span class="number integer">1</span>)
+        
+      } <span class="comment">// end else</span>
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Helper method that concats an arbitrary number of arguments into a 
+storage url.  </p>
+
+<p>Example _createStorageUrl('containerName','foo.jpg', true)</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">_createStorageUrl</span>(){
+    <span class="comment">// Example: https://storage101.ord1.clouddrive.com/v1/MossoCloudFS_4620bda8-69f6-49e3-9ce9-a207f32f5d3b</span>
+   
+     <span class="keyword">var</span> <span class="variable">args</span> = <span class="class">Array</span>.<span class="variable">prototype</span>.<span class="variable">slice</span>.<span class="variable">call</span>(<span class="variable">arguments</span>),
+         <span class="variable">json</span> = (<span class="keyword">typeof</span>(<span class="variable">args</span>[<span class="variable">args</span>.<span class="variable">length</span> - <span class="number integer">1</span>]) === <span class="string">'boolean'</span>) &<span class="variable">amp</span>;&<span class="variable">amp</span>; <span class="variable">args</span>.<span class="variable">pop</span>();
+     <span class="keyword">return</span> [<span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'storageUrl'</span>)].<span class="variable">concat</span>(<span class="variable">args</span>).<span class="variable">join</span>(<span class="string">'/'</span>) + (<span class="variable">json</span> ? <span class="string">'?format=json'</span> : <span class="string">''</span>);
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Helper method that concats an arbitrary number of arguments into a 
+cdn url.  </p>
+
+<p>Example _createCdnUrl('containerName,'foo.jpg', true)</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">_createCdnUrl</span>(){
+   <span class="comment">// Example: https://cdn2.clouddrive.com/v1/MossoCloudFS_4620bda8-69f6-49e3-9ce9-a207f32f5d3b</span>
+   <span class="keyword">var</span> <span class="variable">args</span> = <span class="class">Array</span>.<span class="variable">prototype</span>.<span class="variable">slice</span>.<span class="variable">call</span>(<span class="variable">arguments</span>),
+       <span class="variable">json</span> = (<span class="keyword">typeof</span>(<span class="variable">args</span>[<span class="variable">args</span>.<span class="variable">length</span> - <span class="number integer">1</span>]) === <span class="string">'boolean'</span>) &<span class="variable">amp</span>;&<span class="variable">amp</span>; <span class="variable">args</span>.<span class="variable">pop</span>();
+   <span class="keyword">return</span> [<span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'cdnUrl'</span>)].<span class="variable">concat</span>(<span class="variable">args</span>).<span class="variable">join</span>(<span class="string">'/'</span>) + (<span class="variable">json</span> ? <span class="string">'?format=json'</span> : <span class="string">''</span>);
+  };</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Helper method to determine the mime/content type of a file.</p>
+
+<p>Borrowed from nodejitsu/indexzero: </p>
+
+<p>http://bit.ly/rkShTD</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>String</em>  The path of the file.</p></li><li><p><strong>return</strong>: <em>String</em> </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">_getContentType</span>(<span class="variable">path</span>){
+    <span class="keyword">var</span> <span class="variable">types</span> = {
+        <span class="string">'.3gp'</span>   : <span class="string">'video/3gpp'</span>,
+        <span class="string">'.a'</span>     : <span class="string">'application/octet-stream'</span>,
+        <span class="string">'.ai'</span>    : <span class="string">'application/postscript'</span>,
+        <span class="string">'.aif'</span>   : <span class="string">'audio/x-aiff'</span>,
+        <span class="string">'.aiff'</span>  : <span class="string">'audio/x-aiff'</span>,
+        <span class="string">'.asc'</span>   : <span class="string">'application/pgp-signature'</span>,
+        <span class="string">'.asf'</span>   : <span class="string">'video/x-ms-asf'</span>,
+        <span class="string">'.asm'</span>   : <span class="string">'text/x-asm'</span>,
+        <span class="string">'.asx'</span>   : <span class="string">'video/x-ms-asf'</span>,
+        <span class="string">'.atom'</span>  : <span class="string">'application/atom+xml'</span>,
+        <span class="string">'.au'</span>    : <span class="string">'audio/basic'</span>,
+        <span class="string">'.avi'</span>   : <span class="string">'video/x-msvideo'</span>,
+        <span class="string">'.bat'</span>   : <span class="string">'application/x-msdownload'</span>,
+        <span class="string">'.bin'</span>   : <span class="string">'application/octet-stream'</span>,
+        <span class="string">'.bmp'</span>   : <span class="string">'image/bmp'</span>,
+        <span class="string">'.bz2'</span>   : <span class="string">'application/x-bzip2'</span>,
+        <span class="string">'.c'</span>     : <span class="string">'text/x-c'</span>,
+        <span class="string">'.cab'</span>   : <span class="string">'application/vnd.ms-cab-compressed'</span>,
+        <span class="string">'.cc'</span>    : <span class="string">'text/x-c'</span>,
+        <span class="string">'.chm'</span>   : <span class="string">'application/vnd.ms-htmlhelp'</span>,
+        <span class="string">'.class'</span> : <span class="string">'application/octet-stream'</span>,
+        <span class="string">'.com'</span>   : <span class="string">'application/x-msdownload'</span>,
+        <span class="string">'.conf'</span>  : <span class="string">'text/plain'</span>,
+        <span class="string">'.cpp'</span>   : <span class="string">'text/x-c'</span>,
+        <span class="string">'.crt'</span>   : <span class="string">'application/x-x509-ca-cert'</span>,
+        <span class="string">'.css'</span>   : <span class="string">'text/css'</span>,
+        <span class="string">'.csv'</span>   : <span class="string">'text/csv'</span>,
+        <span class="string">'.cxx'</span>   : <span class="string">'text/x-c'</span>,
+        <span class="string">'.deb'</span>   : <span class="string">'application/x-debian-package'</span>,
+        <span class="string">'.der'</span>   : <span class="string">'application/x-x509-ca-cert'</span>,
+        <span class="string">'.diff'</span>  : <span class="string">'text/x-diff'</span>,
+        <span class="string">'.djv'</span>   : <span class="string">'image/vnd.djvu'</span>,
+        <span class="string">'.djvu'</span>  : <span class="string">'image/vnd.djvu'</span>,
+        <span class="string">'.dll'</span>   : <span class="string">'application/x-msdownload'</span>,
+        <span class="string">'.dmg'</span>   : <span class="string">'application/octet-stream'</span>,
+        <span class="string">'.doc'</span>   : <span class="string">'application/msword'</span>,
+        <span class="string">'.dot'</span>   : <span class="string">'application/msword'</span>,
+        <span class="string">'.dtd'</span>   : <span class="string">'application/xml-dtd'</span>,
+        <span class="string">'.dvi'</span>   : <span class="string">'application/x-dvi'</span>,
+        <span class="string">'.ear'</span>   : <span class="string">'application/java-archive'</span>,
+        <span class="string">'.eml'</span>   : <span class="string">'message/rfc822'</span>,
+        <span class="string">'.eot'</span>   : <span class="string">'application/vnd.bw-fontobject'</span>,
+        <span class="string">'.eps'</span>   : <span class="string">'application/postscript'</span>,
+        <span class="string">'.exe'</span>   : <span class="string">'application/x-msdownload'</span>,
+        <span class="string">'.f'</span>     : <span class="string">'text/x-fortran'</span>,
+        <span class="string">'.f77'</span>   : <span class="string">'text/x-fortran'</span>,
+        <span class="string">'.f90'</span>   : <span class="string">'text/x-fortran'</span>,
+        <span class="string">'.flv'</span>   : <span class="string">'video/x-flv'</span>,
+        <span class="string">'.for'</span>   : <span class="string">'text/x-fortran'</span>,
+        <span class="string">'.gem'</span>   : <span class="string">'application/octet-stream'</span>,
+        <span class="string">'.gemspec'</span> : <span class="string">'text/x-script.ruby'</span>,
+        <span class="string">'.gif'</span>   : <span class="string">'image/gif'</span>,
+        <span class="string">'.gz'</span>    : <span class="string">'application/x-gzip'</span>,
+        <span class="string">'.h'</span>     : <span class="string">'text/x-c'</span>,
+        <span class="string">'.hh'</span>    : <span class="string">'text/x-c'</span>,
+        <span class="string">'.htm'</span>   : <span class="string">'text/html'</span>,
+        <span class="string">'.html'</span>  : <span class="string">'text/html'</span>,
+        <span class="string">'.ico'</span>   : <span class="string">'image/vnd.microsoft.icon'</span>,
+        <span class="string">'.ics'</span>   : <span class="string">'text/calendar'</span>,
+        <span class="string">'.ifb'</span>   : <span class="string">'text/calendar'</span>,
+        <span class="string">'.iso'</span>   : <span class="string">'application/octet-stream'</span>,
+        <span class="string">'.jar'</span>   : <span class="string">'application/java-archive'</span>,
+        <span class="string">'.java'</span>  : <span class="string">'text/x-java-source'</span>,
+        <span class="string">'.jnlp'</span>  : <span class="string">'application/x-java-jnlp-file'</span>,
+        <span class="string">'.jpeg'</span>  : <span class="string">'image/jpeg'</span>,
+        <span class="string">'.jpg'</span>   : <span class="string">'image/jpeg'</span>,
+        <span class="string">'.js'</span>    : <span class="string">'application/javascript'</span>,
+        <span class="string">'.json'</span>  : <span class="string">'application/json'</span>,
+        <span class="string">'.log'</span>   : <span class="string">'text/plain'</span>,
+        <span class="string">'.m3u'</span>   : <span class="string">'audio/x-mpegurl'</span>,
+        <span class="string">'.m4v'</span>   : <span class="string">'video/mp4'</span>,
+        <span class="string">'.man'</span>   : <span class="string">'text/troff'</span>,
+        <span class="string">'.mathml'</span> : <span class="string">'application/mathml+xml'</span>,
+        <span class="string">'.mbox'</span>  : <span class="string">'application/mbox'</span>,
+        <span class="string">'.mdoc'</span>  : <span class="string">'text/troff'</span>,
+        <span class="string">'.me'</span>    : <span class="string">'text/troff'</span>,
+        <span class="string">'.mid'</span>   : <span class="string">'audio/midi'</span>,
+        <span class="string">'.midi'</span>  : <span class="string">'audio/midi'</span>,
+        <span class="string">'.mime'</span>  : <span class="string">'message/rfc822'</span>,
+        <span class="string">'.mml'</span>   : <span class="string">'application/mathml+xml'</span>,
+        <span class="string">'.mng'</span>   : <span class="string">'video/x-mng'</span>,
+        <span class="string">'.mov'</span>   : <span class="string">'video/quicktime'</span>,
+        <span class="string">'.mp3'</span>   : <span class="string">'audio/mpeg'</span>,
+        <span class="string">'.mp4'</span>   : <span class="string">'video/mp4'</span>,
+        <span class="string">'.mp4v'</span>  : <span class="string">'video/mp4'</span>,
+        <span class="string">'.mpeg'</span>  : <span class="string">'video/mpeg'</span>,
+        <span class="string">'.mpg'</span>   : <span class="string">'video/mpeg'</span>,
+        <span class="string">'.ms'</span>    : <span class="string">'text/troff'</span>,
+        <span class="string">'.msi'</span>   : <span class="string">'application/x-msdownload'</span>,
+        <span class="string">'.odp'</span>   : <span class="string">'application/vnd.oasis.opendocument.presentation'</span>,
+        <span class="string">'.ods'</span>   : <span class="string">'application/vnd.oasis.opendocument.spreadsheet'</span>,
+        <span class="string">'.odt'</span>   : <span class="string">'application/vnd.oasis.opendocument.text'</span>,
+        <span class="string">'.ogg'</span>   : <span class="string">'application/ogg'</span>,
+        <span class="string">'.p'</span>     : <span class="string">'text/x-pascal'</span>,
+        <span class="string">'.pas'</span>   : <span class="string">'text/x-pascal'</span>,
+        <span class="string">'.pbm'</span>   : <span class="string">'image/x-portable-bitmap'</span>,
+        <span class="string">'.pdf'</span>   : <span class="string">'application/pdf'</span>,
+        <span class="string">'.pem'</span>   : <span class="string">'application/x-x509-ca-cert'</span>,
+        <span class="string">'.pgm'</span>   : <span class="string">'image/x-portable-graymap'</span>,
+        <span class="string">'.pgp'</span>   : <span class="string">'application/pgp-encrypted'</span>,
+        <span class="string">'.pkg'</span>   : <span class="string">'application/octet-stream'</span>,
+        <span class="string">'.pl'</span>    : <span class="string">'text/x-script.perl'</span>,
+        <span class="string">'.pm'</span>    : <span class="string">'text/x-script.perl-module'</span>,
+        <span class="string">'.png'</span>   : <span class="string">'image/png'</span>,
+        <span class="string">'.pnm'</span>   : <span class="string">'image/x-portable-anymap'</span>,
+        <span class="string">'.ppm'</span>   : <span class="string">'image/x-portable-pixmap'</span>,
+        <span class="string">'.pps'</span>   : <span class="string">'application/vnd.ms-powerpoint'</span>,
+        <span class="string">'.ppt'</span>   : <span class="string">'application/vnd.ms-powerpoint'</span>,
+        <span class="string">'.ps'</span>    : <span class="string">'application/postscript'</span>,
+        <span class="string">'.psd'</span>   : <span class="string">'image/vnd.adobe.photoshop'</span>,
+        <span class="string">'.py'</span>    : <span class="string">'text/x-script.python'</span>,
+        <span class="string">'.qt'</span>    : <span class="string">'video/quicktime'</span>,
+        <span class="string">'.ra'</span>    : <span class="string">'audio/x-pn-realaudio'</span>,
+        <span class="string">'.rake'</span>  : <span class="string">'text/x-script.ruby'</span>,
+        <span class="string">'.ram'</span>   : <span class="string">'audio/x-pn-realaudio'</span>,
+        <span class="string">'.rar'</span>   : <span class="string">'application/x-rar-compressed'</span>,
+        <span class="string">'.rb'</span>    : <span class="string">'text/x-script.ruby'</span>,
+        <span class="string">'.rdf'</span>   : <span class="string">'application/rdf+xml'</span>,
+        <span class="string">'.roff'</span>  : <span class="string">'text/troff'</span>,
+        <span class="string">'.rpm'</span>   : <span class="string">'application/x-redhat-package-manager'</span>,
+        <span class="string">'.rss'</span>   : <span class="string">'application/rss+xml'</span>,
+        <span class="string">'.rtf'</span>   : <span class="string">'application/rtf'</span>,
+        <span class="string">'.ru'</span>    : <span class="string">'text/x-script.ruby'</span>,
+        <span class="string">'.s'</span>     : <span class="string">'text/x-asm'</span>,
+        <span class="string">'.sgm'</span>   : <span class="string">'text/sgml'</span>,
+        <span class="string">'.sgml'</span>  : <span class="string">'text/sgml'</span>,
+        <span class="string">'.sh'</span>    : <span class="string">'application/x-sh'</span>,
+        <span class="string">'.sig'</span>   : <span class="string">'application/pgp-signature'</span>,
+        <span class="string">'.snd'</span>   : <span class="string">'audio/basic'</span>,
+        <span class="string">'.so'</span>    : <span class="string">'application/octet-stream'</span>,
+        <span class="string">'.svg'</span>   : <span class="string">'image/svg+xml'</span>,
+        <span class="string">'.svgz'</span>  : <span class="string">'image/svg+xml'</span>,
+        <span class="string">'.swf'</span>   : <span class="string">'application/x-shockwave-flash'</span>,
+        <span class="string">'.t'</span>     : <span class="string">'text/troff'</span>,
+        <span class="string">'.tar'</span>   : <span class="string">'application/x-tar'</span>,
+        <span class="string">'.tbz'</span>   : <span class="string">'application/x-bzip-compressed-tar'</span>,
+        <span class="string">'.tci'</span>   : <span class="string">'application/x-topcloud'</span>,
+        <span class="string">'.tcl'</span>   : <span class="string">'application/x-tcl'</span>,
+        <span class="string">'.tex'</span>   : <span class="string">'application/x-tex'</span>,
+        <span class="string">'.texi'</span>  : <span class="string">'application/x-texinfo'</span>,
+        <span class="string">'.texinfo'</span> : <span class="string">'application/x-texinfo'</span>,
+        <span class="string">'.text'</span>  : <span class="string">'text/plain'</span>,
+        <span class="string">'.tif'</span>   : <span class="string">'image/tiff'</span>,
+        <span class="string">'.tiff'</span>  : <span class="string">'image/tiff'</span>,
+        <span class="string">'.torrent'</span> : <span class="string">'application/x-bittorrent'</span>,
+        <span class="string">'.tr'</span>    : <span class="string">'text/troff'</span>,
+        <span class="string">'.ttf'</span>   : <span class="string">'application/x-font-ttf'</span>,
+        <span class="string">'.txt'</span>   : <span class="string">'text/plain'</span>,
+        <span class="string">'.vcf'</span>   : <span class="string">'text/x-vcard'</span>,
+        <span class="string">'.vcs'</span>   : <span class="string">'text/x-vcalendar'</span>,
+        <span class="string">'.vrml'</span>  : <span class="string">'model/vrml'</span>,
+        <span class="string">'.war'</span>   : <span class="string">'application/java-archive'</span>,
+        <span class="string">'.wav'</span>   : <span class="string">'audio/x-wav'</span>,
+        <span class="string">'.wma'</span>   : <span class="string">'audio/x-ms-wma'</span>,
+        <span class="string">'.wmv'</span>   : <span class="string">'video/x-ms-wmv'</span>,
+        <span class="string">'.wmx'</span>   : <span class="string">'video/x-ms-wmx'</span>,
+        <span class="string">'.woff'</span>  : <span class="string">'font/woff'</span>,
+        <span class="string">'.wrl'</span>   : <span class="string">'model/vrml'</span>,
+        <span class="string">'.wsdl'</span>  : <span class="string">'application/wsdl+xml'</span>,
+        <span class="string">'.xbm'</span>   : <span class="string">'image/x-xbitmap'</span>,
+        <span class="string">'.xhtml'</span>   : <span class="string">'application/xhtml+xml'</span>,
+        <span class="string">'.xls'</span>   : <span class="string">'application/vnd.ms-excel'</span>,
+        <span class="string">'.xml'</span>   : <span class="string">'application/xml'</span>,
+        <span class="string">'.xpm'</span>   : <span class="string">'image/x-xpixmap'</span>,
+        <span class="string">'.xsl'</span>   : <span class="string">'application/xml'</span>,
+        <span class="string">'.xslt'</span>  : <span class="string">'application/xslt+xml'</span>,
+        <span class="string">'.yaml'</span>  : <span class="string">'text/yaml'</span>,
+        <span class="string">'.yml'</span>   : <span class="string">'text/yaml'</span>,
+        <span class="string">'.zip'</span>   : <span class="string">'application/zip'</span>
+      }
+    
+      <span class="keyword">var</span> <span class="variable">index</span> = <span class="class">String</span>(<span class="variable">path</span>).<span class="variable">lastIndexOf</span>(<span class="string">'.'</span>);
+      <span class="keyword">if</span> (!<span class="variable">index</span>) {
+        <span class="keyword">return</span> <span class="string">'text/plain'</span>
+      }
+      <span class="keyword">var</span> <span class="variable">type</span> = <span class="variable">types</span>[<span class="variable">path</span>.<span class="variable">substring</span>(<span class="variable">index</span>).<span class="variable">toLowerCase</span>()] || <span class="string">'text/plain'</span>;
+      <span class="keyword">return</span> (<span class="regexp">/(text|javascript)/</span>).<span class="variable">test</span>(<span class="variable">type</span>) ? <span class="variable">type</span> + <span class="string">'; charset=utf-8'</span> : <span class="variable">type</span>;  
+  }</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<ul><li><p><strong>scope</strong>: <em>networkModule</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">return</span> {</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Method verifies a set of Rackspace API credentials.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>String</em>  Path to the file (path provided by Titanium Filesystem methods).</p></li><li><p><strong>param</strong>: <em>String</em>  A name for the file being uploaded (optional).</p></li><li><p><strong>return</strong>: <em>void</em></p><p></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">setAuth</span>: <span class="keyword">function</span>() {
+      
+      <span class="comment">// GET /&lt;api version&gt;/&lt;account&gt; HTTP/1.1</span>
+      <span class="comment">// Host: storage.clouddrive.com</span>
+      <span class="comment">// X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cb</span>
+      <span class="comment">// curl -D - -H &quot;X-Auth-User: YOUR_USERNAME&quot; -H &quot;X-Auth-Key: YOUR_AUTH_KEY&quot; \</span>
+      <span class="comment">//  -X GET https://auth.api.rackspacecloud.com/v1.0</span>
+      
+      <span class="class">Gun</span>
+        .<span class="variable">spinner</span>
+          .<span class="variable">showOverlaySpinner</span>(<span class="keyword">function</span>(){
+            
+            <span class="variable">_rackspaceInputs</span>.<span class="variable">attr</span>(<span class="string">'disabled'</span>, <span class="variable">true</span>)
+            
+            <span class="keyword">var</span> <span class="variable">authOptions</span> = {
+              <span class="variable">uri</span>: <span class="string">'https://'</span> + <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'host'</span>) + <span class="string">'/v1.0'</span>, 
+              <span class="variable">headers</span>: {
+                <span class="string">'X-Auth-User'</span>: <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'username'</span>),
+                <span class="string">'X-Auth-Key'</span>: <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'apikey'</span>)
+              }
+            }
+            
+            <span class="variable">_httpClient</span>  = <span class="class">Ti</span>.<span class="class">Network</span>.<span class="variable">createHTTPClient</span>();
+
+            <span class="comment">// TODO:  Update this with more relevant, useful stuff.</span>
+            <span class="variable">_httpClient</span>.<span class="variable">onreadystatechange</span> = <span class="keyword">function</span>(<span class="variable">data</span>){
+                <span class="keyword">if</span>( <span class="variable">_httpClient</span>.<span class="variable">readyState</span> == <span class="number integer">4</span>)
+                {
+                  <span class="comment">// console.log(data)</span>
+                  <span class="comment">// if(data)</span>
+                }
+            }
+
+            <span class="variable">_httpClient</span>.<span class="variable">onload</span> = <span class="keyword">function</span>(<span class="variable">data</span>){
+              <span class="variable">_setAuthHandler</span>(<span class="keyword">null</span>, <span class="variable">data</span>, <span class="variable">_httpClient</span>)
+            } 
+
+            <span class="variable">_setHeaders</span>(<span class="variable">_httpClient</span>, <span class="variable">authOptions</span>.<span class="variable">headers</span>)
+
+            <span class="variable">_httpClient</span>.<span class="variable">open</span>(<span class="string">'GET'</span>, <span class="variable">authOptions</span>.<span class="variable">uri</span>)
+            <span class="variable">_httpClient</span>.<span class="variable">send</span>()
+            
+          });
+      
+    }, <span class="comment">// end setAuth</span></code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Method that grabs all the user's containers on Rackspace Cloud Files and 
+passes the response to the handler.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p><p> </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">getContainers</span>: <span class="keyword">function</span>(){
+
+      <span class="comment">// curl -D -I -H &quot;X-Auth-Token: 3372b7ea-d5fc-416a-a57d-dd53535eddbd&quot; -H &quot;Accept: application/json&quot; \</span>
+      <span class="comment">//  -X GET https://cdn2.clouddrive.com/v1/MossoCloudFS_4620bda8-69f6-49e3-9ce9-a207f32f5d3b\?format\=json \</span>
+      <span class="comment">// | jsonpretty</span>
+
+      <span class="comment">// Gun.ui.toggleMiniSpinner() -&gt; NO LONGER USED</span>
+
+      <span class="keyword">var</span> <span class="variable">headers</span> = {
+        <span class="string">'X-Auth-Token'</span>: <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'authToken'</span>),
+        <span class="string">'Accept'</span>: <span class="string">'application/json'</span>
+      }
+
+      <span class="variable">_httpClient</span> = <span class="class">Ti</span>.<span class="class">Network</span>.<span class="variable">createHTTPClient</span>();
+
+      <span class="variable">_httpClient</span>.<span class="variable">onerror</span> = <span class="keyword">function</span>(<span class="variable">err</span>){
+        <span class="variable">alert</span>(<span class="string">'Error with fetching containers: '</span>+ <span class="variable">err</span>.<span class="variable">message</span>)
+      }
+
+      <span class="variable">_httpClient</span>.<span class="variable">onload</span> = <span class="keyword">function</span>(<span class="variable">data</span>){
+        <span class="variable">_getContainersHandler</span>(<span class="keyword">null</span>,<span class="variable">data</span>,<span class="variable">_httpClient</span>)    
+      }
+
+      <span class="variable">_setHeaders</span>(<span class="variable">_httpClient</span>, <span class="variable">headers</span>)
+
+      <span class="variable">_httpClient</span>.<span class="variable">open</span>(<span class="string">'GET'</span>, <span class="variable">_createCdnUrl</span>(<span class="variable">true</span>));
+      <span class="variable">_httpClient</span>.<span class="variable">send</span>()
+
+    },</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Method that grabs the metadata of a specific container.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p><p> </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">getContainer</span> : <span class="keyword">function</span>(<span class="variable">container</span>, <span class="variable">cb</span>){
+      
+      <span class="keyword">var</span> <span class="variable">headers</span> = {
+        <span class="string">'X-Auth-Token'</span>: <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'authToken'</span>),
+        <span class="string">'Accept'</span>: <span class="string">'application/json'</span>
+      }
+
+      <span class="variable">_httpClient</span> = <span class="class">Ti</span>.<span class="class">Network</span>.<span class="variable">createHTTPClient</span>();
+
+      <span class="variable">_httpClient</span>.<span class="variable">onerror</span> = <span class="keyword">function</span>(){
+        <span class="variable">alert</span>(<span class="string">'Error fetching container: '</span>+ <span class="variable">err</span>.<span class="variable">message</span>)
+      }
+
+      <span class="variable">_httpClient</span>.<span class="variable">onload</span> = <span class="keyword">function</span>(<span class="variable">data</span>){
+        <span class="variable">_getContainerHandler</span>(<span class="keyword">null</span>, <span class="variable">data</span>, <span class="variable">_httpClient</span>, <span class="variable">cb</span>)
+      }
+
+      <span class="keyword">var</span> <span class="variable">url</span> = <span class="variable">_createCdnUrl</span>(<span class="variable">container</span>, <span class="variable">true</span>)
+      
+      <span class="variable">_httpClient</span>.<span class="variable">open</span>(<span class="string">'GET'</span>, <span class="variable">url</span> );
+      <span class="variable">_httpClient</span>.<span class="variable">send</span>()
+      
+    }, <span class="comment">// end getContainer</span></code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Method to upload a file to Rackspace cloud container.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>Object</em>   A file object</p></li><li><p><strong>return</strong>: <em>void</em></p><p> </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="variable">uploadFile</span>: <span class="keyword">function</span>(<span class="variable">file</span>){
+      
+      <span class="comment">// PUT /&lt;api version&gt;/&lt;account&gt;/&lt;container&gt;/&lt;object&gt; HTTP/1.1</span>
+      <span class="comment">// Host: storage.clouddrive.com</span>
+      <span class="comment">// X-Auth-Token: 3372b7ea-d5fc-416a-a57d-dd53535eddbd</span>
+
+      <span class="comment">// Upload to a storage container:</span>
+      <span class="comment">// curl -i -X PUT -T /Users/path/to/some/img_foo.jpg \</span>
+      <span class="comment">// -H &quot;X-Auth-Token: 3372b7ea-d5fc-416a-a57d-dd53535eddbd&quot; \</span>
+      <span class="comment">// https://storage101.ord1.clouddrive.com/v1/random_string/deleteme/img_foo.jpg</span>
+      
+      <span class="comment">// We must set the content-type header so the browser doesn't automatically download it.</span>
+      <span class="keyword">var</span> <span class="variable">headers</span> = {
+        <span class="string">'X-Auth-Token'</span>: <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'authToken'</span>),
+        <span class="string">'Content-Type'</span>: <span class="variable">_getContentType</span>(<span class="variable">file</span>.<span class="variable">name</span>),
+        <span class="string">'X-File-Name'</span>: <span class="variable">file</span>.<span class="variable">fileName</span>,
+        <span class="string">'X-File-Size'</span>: <span class="variable">file</span>.<span class="variable">fileSize</span>,
+        <span class="string">'X-File-Type'</span>: <span class="variable">file</span>.<span class="variable">type</span>
+      }
+      , <span class="variable">filename</span> = <span class="variable">encodeURIComponent</span>(<span class="variable">file</span>.<span class="variable">name</span>)
+      , <span class="variable">url</span> = <span class="variable">_createStorageUrl</span>( <span class="variable">_currentContainer</span> || <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'container'</span>), <span class="variable">filename</span>, <span class="variable">false</span>) 
+      , <span class="variable">xhr</span> = <span class="keyword">new</span> <span class="class">XMLHttpRequest</span>()
+
+      <span class="variable">xhr</span>.<span class="variable">open</span>(<span class="string">'PUT'</span>, <span class="variable">url</span>, <span class="variable">true</span>)
+
+      <span class="comment">// TODO: SERIOUSLY, MAKE THIS BETTER </span>
+      <span class="variable">xhr</span>.<span class="variable">onreadystatechange</span> = <span class="keyword">function</span>(<span class="variable">evt</span>) {
+        <span class="keyword">if</span> (<span class="this">this</span>.<span class="variable">readyState</span> != <span class="number integer">4</span>) { <span class="keyword">return</span>; }
+        
+        <span class="comment">// In order to not change the way errors are handled in _uploadFileHandler</span>
+        <span class="comment">// we just normalize the error message and append to the event.target object</span>
+        <span class="keyword">if</span>(<span class="variable">evt</span>.<span class="variable">target</span>.<span class="variable">status</span> == <span class="number integer">404</span>){
+          <span class="variable">evt</span>.<span class="variable">target</span>.<span class="variable">message</span> = <span class="string">'The page could not be found (404).'</span>
+          <span class="variable">_uploadFileHandler</span>(<span class="variable">evt</span>.<span class="variable">target</span>, <span class="keyword">null</span>)
+        }
+        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable">evt</span>.<span class="variable">target</span>.<span class="variable">status</span> == <span class="number integer">403</span>){
+          <span class="variable">evt</span>.<span class="variable">target</span>.<span class="variable">message</span> = <span class="string">'Authorization issue with that URL (403).'</span>
+          <span class="variable">_uploadFileHandler</span>(<span class="variable">evt</span>.<span class="variable">target</span>, <span class="keyword">null</span>)
+        }
+        <span class="keyword">else</span>
+        {
+          <span class="comment">// Append the filename to the event object</span>
+          <span class="variable">evt</span>.<span class="variable">target</span>.<span class="variable">filename</span> = <span class="variable">file</span>.<span class="variable">fileName</span>
+          <span class="variable">_uploadFileHandler</span>(<span class="keyword">null</span>, <span class="variable">evt</span>.<span class="variable">target</span>)
+        }
+        
+      }
+      
+      <span class="comment">// TODO: IMPLEMENT THIS</span>
+      <span class="comment">// xhr.onerror = function(evt){</span>
+      <span class="comment">//   console.log('error')</span>
+      <span class="comment">//   _uploadFileHandler(evt.target, null)</span>
+      <span class="comment">// }</span>
+      <span class="comment">//</span>
+      
+      <span class="variable">_setHeaders</span>(<span class="variable">xhr</span>,<span class="variable">headers</span>)
+
+      <span class="variable">xhr</span>.<span class="variable">send</span>(<span class="variable">file</span>)
+
+    }
+    
+  } <span class="comment">// end api</span>
+  
+  
+} <span class="comment">// end module</span></code></pre>
+</td>
+</tr><tr class="filename"><td><h2 id="public/js/properties.js"><a href="#">properties</a></h2></td><td>public/js/properties.js</td></tr><tr class="code">
+<td class="docs">
+<p>Methods that work with the Titanium Application's key/value store, the app properties.</p>
+
+<p> </p>
+</td>
+<td class="code">
+
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Gets an app property.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>String</em>  Key name to retrieve.</p></li><li><p><strong>return</strong>: <em>String</em>  The value of the key.</p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span> = <span class="keyword">function</span>(<span class="variable">key</span>)
+{
+  <span class="keyword">return</span> <span class="class">Ti</span>.<span class="class">App</span>.<span class="class">Properties</span>.<span class="variable">getString</span>(<span class="variable">key</span>, <span class="string">''</span>);
+}</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Sets an app property.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>String</em>  Key name to store</p></li><li><p><strong>param</strong>: <em>String</em>  The value of the key to store.</p></li><li><p><strong>return</strong>: <em>current</em>
+'this' value (chainable)</p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">set</span> = <span class="keyword">function</span>(<span class="variable">key</span>,<span class="variable">value</span>)
+{
+  <span class="class">Ti</span>.<span class="class">App</span>.<span class="class">Properties</span>.<span class="variable">setString</span>(<span class="variable">key</span>, <span class="variable">value</span>);
+  <span class="keyword">return</span> <span class="this">this</span>
+}</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Checks to see if the user's credentials are stashed in the app properties.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>return</strong>: <em>Boolean</em> </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">hasCredentials</span> = <span class="keyword">function</span>()
+{
+  <span class="keyword">return</span> <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'username'</span>) &<span class="variable">amp</span>;&<span class="variable">amp</span>; <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'apikey'</span>) &<span class="variable">amp</span>;&<span class="variable">amp</span>; <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="string">'host'</span>)
+}</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Resets all property values to the empty string.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>Function</em>  An optional callback.</p></li><li><p><strong>return</strong>: <em>current</em>
+'this' value (chainable)</p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">wipe</span> = <span class="keyword">function</span>(<span class="variable">cb</span>)
+{
+  <span class="keyword">var</span> <span class="variable">allProps</span> = <span class="class">Ti</span>.<span class="class">App</span>.<span class="class">Properties</span>.<span class="variable">listProperties</span>()
+  
+  <span class="variable">allProps</span>.<span class="variable">forEach</span>(<span class="keyword">function</span>(<span class="variable">el</span>,<span class="variable">i</span>){
+    <span class="class">Gun</span>
+      .<span class="variable">properties</span>
+        .<span class="variable">set</span>(<span class="variable">el</span>,<span class="string">''</span>)
+  })
+
+  <span class="variable">cb</span> &<span class="variable">amp</span>;&<span class="variable">amp</span>; <span class="variable">cb</span>();
+  
+  <span class="keyword">return</span> <span class="this">this</span>;
+}</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Output all property keys and values to the console.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>Function</em>  An optional callback.</p></li><li><p><strong>return</strong>: <em>current</em>
+'this' value (chainable)</p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">list</span> = <span class="keyword">function</span>(<span class="variable">cb</span>)
+{
+  <span class="keyword">var</span> <span class="variable">allProps</span> = <span class="class">Ti</span>.<span class="class">App</span>.<span class="class">Properties</span>.<span class="variable">listProperties</span>()
+  
+  <span class="variable">allProps</span>.<span class="variable">forEach</span>(<span class="keyword">function</span>(<span class="variable">el</span>,<span class="variable">i</span>){
+    <span class="variable">console</span>.<span class="variable">log</span>(<span class="variable">el</span> + &<span class="variable">quot</span>; : &<span class="variable">quot</span>; + <span class="class">Gun</span>.<span class="variable">properties</span>.<span class="variable">get</span>(<span class="variable">el</span>) )
+  })
+
+  <span class="variable">cb</span> &<span class="variable">amp</span>;&<span class="variable">amp</span>; <span class="variable">cb</span>();
+  
+  <span class="keyword">return</span> <span class="this">this</span>;
+}
+</code></pre>
+</td>
+</tr><tr class="filename"><td><h2 id="public/js/setup.js"><a href="#">setup</a></h2></td><td>public/js/setup.js</td></tr><tr class="code">
+<td class="docs">
+<p>Initialization and global setup of properties and variables.</p>
+
+<p> </p>
+</td>
+<td class="code">
+<pre><code><span class="keyword">var</span> <span class="variable">debug</span> = <span class="variable">false</span>;
+
+<span class="class">Gun</span> = {}
+
+<span class="class">Gun</span>.<span class="variable">properties</span> = {}
+
+<span class="class">Gun</span>.<span class="variable">network</span> = {}
+
+<span class="class">Gun</span>.<span class="variable">menu</span> = {}
+
+<span class="class">Gun</span>.<span class="variable">ui</span> = {}
+
+<span class="keyword">var</span> <span class="variable">w</span> = <span class="variable">window</span>
+  , <span class="variable">d</span> = <span class="variable">document</span>
+  , <span class="variable">isTitanium</span> = <span class="variable">false</span>
+  , <span class="variable">db</span>
+  , <span class="variable">_curwin</span>                     <span class="comment">// capture the current Main window </span>
+  , <span class="variable">_resultsWindow</span>              <span class="comment">// capture the results Titanium User Window</span>
+  , <span class="variable">_resultsDom</span>                 <span class="comment">// capture the DOM of the results window</span>
+  , <span class="variable">_isResultsCreated</span>          <span class="comment">// flag used when updating the results window</span>
+  , <span class="variable">_currentContainer</span> = &<span class="variable">quot</span>;&<span class="variable">quot</span>;      <span class="comment">// the value set when the container list changes by user selection.</span>
+  , <span class="variable">_protocol</span> = <span class="regexp">/^(http|https):\/</span>\<span class="comment">//</span>
+  , <span class="class">Ti</span> = <span class="class">Titanium</span>
+  , <span class="variable">_rackspaceInputs</span> = $(<span class="string">'#rackspaceCredForm'</span>).<span class="variable">find</span>(<span class="string">'input'</span>) <span class="comment">// grab these for use in code.js and network.js</span>
+</code></pre>
+</td>
+</tr><tr class="filename"><td><h2 id="public/js/utils.js"><a href="#">utils</a></h2></td><td>public/js/utils.js</td></tr><tr class="code">
+<td class="docs">
+<p>General utility functions; mainly internal app/debugging use and may not be used in actual app code.</p>
+
+<p> </p>
+</td>
+<td class="code">
+
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Some feature detection AND user agent sniffing much to the chagrin of @fearphage.</p>
+
+<ul><li><p><strong>return</strong>: <em>void</em></p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">yeahNo</span>()
+{
+	<span class="variable">isTitanium</span> = (<span class="keyword">typeof</span> <span class="variable">window</span>.<span class="class">Titanium</span> === <span class="string">'object'</span>) ? <span class="variable">true</span> : <span class="variable">false</span>;
+	<span class="variable">isLocalhost</span> = <span class="regexp">/(loc|127)/</span>.<span class="variable">test</span>(<span class="variable">location</span>.<span class="variable">hostname</span>);
+}</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Utility method to parse just the filename of a file in its path.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>String</em>  The path to the file.</p></li><li><p><strong>return</strong>: <em>String</em> </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">getSimpleFileName</span>(<span class="variable">pathToFile</span>)
+{
+  <span class="keyword">return</span> <span class="variable">pathToFile</span>.<span class="variable">split</span>(&<span class="variable">quot</span>;/&<span class="variable">quot</span>;).<span class="variable">pop</span>();
+}</code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
+<p>Utility method to async load a JavaScript file.</p>
+
+<h2></h2>
+
+<ul><li><p><strong>param</strong>: <em>String</em>  The name of the file to load</p></li><li><p><strong>param</strong>: <em>Function</em>  Optional callback to be executed after the script loads.</p></li><li><p><strong>return</strong>: <em>void</em> </p></li></ul>
+</td>
+<td class="code">
+<pre><code><span class="keyword">function</span> <span class="variable">asyncLoad</span>(<span class="variable">filename</span>,<span class="variable">cb</span>)
+{
+	(<span class="keyword">function</span>(<span class="variable">d</span>,<span class="variable">t</span>){
+		<span class="keyword">var</span> <span class="variable">g</span>=<span class="variable">d</span>.<span class="variable">createElement</span>(<span class="variable">t</span>),
+				<span class="variable">s</span>=<span class="variable">d</span>.<span class="variable">getElementsByTagName</span>(<span class="variable">t</span>)[<span class="number integer">0</span>];
+				<span class="variable">g</span>.<span class="variable">async</span>=<span class="number integer">1</span>;
+  	    <span class="variable">g</span>.<span class="variable">src</span>= (<span class="variable">isLocalhost</span>) ? <span class="string">'/js/'</span>+<span class="variable">filename</span> : <span class="string">'http://change.this.to.your.website.com/js/'</span>+<span class="variable">filename</span>;
+  	    <span class="variable">s</span>.<span class="variable">parentNode</span>.<span class="variable">insertBefore</span>(<span class="variable">g</span>,<span class="variable">s</span>)
+
+		<span class="comment">// After the script has loaded, let's make the map frame draggable and resizable.</span>
+		<span class="variable">g</span>.<span class="variable">onload</span> = <span class="keyword">function</span>(){
+		  <span class="variable">cb</span> &<span class="variable">amp</span>;&<span class="variable">amp</span>; <span class="variable">cb</span>()
+		}
+
+	}(<span class="variable">document</span>,<span class="string">'script'</span>));
+	
+}
+</code></pre>
+</td>
+</tr>	</body>
+</html></tbody></table>

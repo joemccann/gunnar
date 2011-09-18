@@ -1,0 +1,112 @@
+.overlay,
+.spinner,
+.invisible,
+.spinner_copy {
+  visibility: hidden;
+}
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  top: 0;
+  left: 0;
+}
+.spinner,
+.spinner_copy {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+}
+.spinner {
+  top: 333px;
+  left: 230px;
+}
+.spinner_copy {
+  left: 22px;
+  top: 43px;
+  width: 16px;
+  height: 16px;
+}
+.spinner div,
+.spinner_copy div {
+  width: 12%;
+  height: 26%;
+  background: #2face1;
+  position: absolute;
+  left: 44.5%;
+  top: 37%;
+  -webkit-animation: fade 1s linear infinite;
+  -webkit-border-radius: 50px;
+  -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+.spinner .bar1,
+.spinner_copy .bar1 {
+  -webkit-transform: rotate(0deg) translate(0, -142%);
+  -webkit-animation-delay: 0s;
+}
+.spinner .bar2,
+.spinner_copy .bar2 {
+  -webkit-transform: rotate(30deg) translate(0, -142%);
+  -webkit-animation-delay: -0.9167s;
+}
+.spinner .bar3,
+.spinner_copy .bar3 {
+  -webkit-transform: rotate(60deg) translate(0, -142%);
+  -webkit-animation-delay: -0.833s;
+}
+.spinner .bar4,
+.spinner_copy .bar4 {
+  -webkit-transform: rotate(90deg) translate(0, -142%);
+  -webkit-animation-delay: -0.75s;
+}
+.spinner .bar5,
+.spinner_copy .bar5 {
+  -webkit-transform: rotate(120deg) translate(0, -142%);
+  -webkit-animation-delay: -0.667s;
+}
+.spinner .bar6,
+.spinner_copy .bar6 {
+  -webkit-transform: rotate(150deg) translate(0, -142%);
+  -webkit-animation-delay: -0.5833s;
+}
+.spinner .bar7,
+.spinner_copy .bar7 {
+  -webkit-transform: rotate(180deg) translate(0, -142%);
+  -webkit-animation-delay: -0.5s;
+}
+.spinner .bar8,
+.spinner_copy .bar8 {
+  -webkit-transform: rotate(210deg) translate(0, -142%);
+  -webkit-animation-delay: -0.41667s;
+}
+.spinner .bar9,
+.spinner_copy .bar9 {
+  -webkit-transform: rotate(240deg) translate(0, -142%);
+  -webkit-animation-delay: -0.333s;
+}
+.spinner .bar10,
+.spinner_copy .bar10 {
+  -webkit-transform: rotate(270deg) translate(0, -142%);
+  -webkit-animation-delay: -0.25s;
+}
+.spinner .bar11,
+.spinner_copy .bar11 {
+  -webkit-transform: rotate(300deg) translate(0, -142%);
+  -webkit-animation-delay: -0.1667s;
+}
+.spinner .bar12,
+.spinner_copy .bar12 {
+  -webkit-transform: rotate(330deg) translate(0, -142%);
+  -webkit-animation-delay: -0.0833s;
+}
+@-webkit-keyframes fade {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.25;
+  }
+}

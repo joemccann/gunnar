@@ -1,0 +1,42 @@
+.fadeIn
+  -webkit-transition: opacity .4s ease-in;
+  -moz-transition: opacity .4s ease-in;  
+  -o-transition: opacity .4s ease-in;  
+  -webkit-transition: opacity .4s ease-in;  
+  -ms-transition: opacity .4s ease-in;  
+  transition: opacity .4s ease-in;  
+  opacity: 1;
+  visibility visible
+
+.fadeOut
+  -webkit-transition: opacity .4s ease-in;
+  -moz-transition: opacity .4s ease-in;  
+  -o-transition: opacity .4s ease-in;  
+  -webkit-transition: opacity .4s ease-in;  
+  -ms-transition: opacity .4s ease-in;  
+  transition: opacity .4s ease-in;  
+  opacity: 0
+
+#holder.pulsate_out
+  -webkit-animation: pulseOut 1.3s ease-out infinite
+
+#holder.pulsate_in
+  -webkit-animation: pulseIn 1s ease-out
+
+#holder.big_shadow
+  -webkit-box-shadow: 0 0 48px rgba(0,0,0,0.48)
+
+
+@keyframes pulseOut
+  0%
+    -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.48)
+  50%
+    -webkit-box-shadow: 0 0 48px rgba(47,172,225,1)
+  100%
+    -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.48)
+
+@keyframes pulseIn
+  0%
+    -webkit-box-shadow: 0 0 48px rgba(0,0,0,0.48)
+  100%
+    -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.48)

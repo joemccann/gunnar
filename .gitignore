@@ -1,0 +1,17 @@
+.DS_Store
+node.pid
+dist/*
+*.zip
+gunnar_build/*
+icon_sizes.md
+gunnar_app/timanifest
+English.lproj
+uploads/*.jpg
+uploads/*.png
+uploads/*.gif
+uploads/*.jpeg
+uploads/*.JPEG
+uploads/*.JPG
+uploads/*.mp3
+uploads/*.mpeg
+uploads/*.flv

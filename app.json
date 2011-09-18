@@ -1,0 +1,13 @@
+{
+  "VERSION": "0.0.1",
+  "JSHINT_OPTS": { "laxbreak": true, "asi": true },
+  "JAVASCRIPT": {
+    "DIST_DIR": "./public/js",
+    "all": [ "./public/js/jquery-1.6.1.min.js", "./public/js/chosen.jquery.min.js", "./public/js/setup.js", "./public/js/utils.js", "./public/js/menu.js", "./public/js/network.js","./public/js/filesystem.js", "./public/js/properties.js","./public/js/spinner.js","./public/js/code.js"]
+  },
+  "CSS": {
+    "DIST_DIR": "./public/css",
+    "style": ["./public/css/style.css"]
+  },
+  "DEBUG": false
+}

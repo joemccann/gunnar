@@ -1,0 +1,9 @@
+#appname:Gunnar
+#appid:com.subprint.gunnar
+#publisher:Joe McCann
+#image:default_app_logo.png
+#url:http://subprint.com
+#guid:0eb01957-a020-46f9-a0ef-cd4f2106452e
+#desc:No description provided
+#type:desktop
+runtime:1.1.0

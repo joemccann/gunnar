@@ -1,0 +1,19 @@
+!!! 5
+html
+  head
+    title #{options.title} documentation
+    link(rel='stylesheet', href='public/main.css') 
+  body
+    #content
+      h1= options.title
+
+      - if (options.description)
+        .description!= markdown(options.description)
+
+      - if (options.github)
+        a.button(href='https://github.com/' + options.github) View Source
+
+    ul#files
+      li: a(href='/') home
+      - each file in files
+        li: a(href=file.dest)= file.path  

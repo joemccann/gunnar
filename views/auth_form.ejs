@@ -1,0 +1,42 @@
+<div class="shadowbox authform">
+  <h2>Please Enter Your Rackspace Credentials</h2>
+  <form id="rackspaceCredForm" action="#" name="rackspaceCredForm"> 
+<% var rackInit = auth_form %>
+<% for(i=0;i<rackInit.length;i++){ %>
+
+    <div class="field <% if (rackInit[i].required){ %>required<%}%>">
+
+      <div class="label" id="for_<%- rackInit[i].id.toLowerCase() %>">
+        <span class="content">
+          <span class="innerlabel"><%- rackInit[i].id %></span>
+          <% if (rackInit[i].required){ %>
+          <span class="help">(Required)</span>
+          <% } %>
+        </span>
+        <input tabindex="<%- i+1 %>" type="text" id="<%- rackInit[i].id.toLowerCase() %>" <% if (rackInit[i].placeholder){ %> placeholder="<%- rackInit[i].placeholder %>" <% } %> value="<%- rackInit[i].value %>" />
+
+        <div class="helper">
+          <div class="tip tip_<%- rackInit[i].id.toLowerCase() %>">
+        	  <p><%- rackInit[i].tip %></p>
+        	</div>
+        </div>
+
+      </div>
+  
+    </div>
+
+<%}%>
+
+    <p class="button_container">
+      <a href="#" tabindex='4' id="storeRackspaceCreds" class="large awesome">Save Credentials</a>
+    </p>
+    <p class="flatbottom">
+        Don't have your credentials? <a target="_blank" href="https://manage.rackspacecloud.com/APIAccess.do">Go To Your Rackspace Account →</a>
+    </p>
+    <p class="flatbottom">
+        Don't have a Rackspace account? <a target="_blank" href="http://www.rackspacecloud.com/2469.html">Get One for Free Here →</a>
+    </p>
+
+  </form> 
+
+</div> <!-- end shadowbox -->

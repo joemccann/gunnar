@@ -1,0 +1,129 @@
+input::-webkit-input-placeholder {
+  color: gunBlue;
+}
+.label {
+  display: block;
+  font-size: 1.6em;
+}
+.label .content {
+  display: block;
+}
+.inline-label {
+  display: inline;
+}
+.content .innerlabel {
+  font-weight: 500;
+}
+.content .help {
+  font-size: 0.9em;
+  color: #999;
+  text-transform: lowercase;
+}
+#rackspaceCredForm,
+.container_list_container {
+  padding: 0 28px;
+}
+.inline_left {
+  margin: 6px 0 0 10px;
+  display: inline-block;
+}
+input[type="text"] {
+  background: #fff;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eee), color-stop(0.5, #fff));
+  background-image: linear-gradient(top, #eee 0%, #fff 50%);
+  border: 1px solid #aaa;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-border-radius: 4px;
+  -webkit-appearance: none;
+  border-radius: 4px;
+  color: #444;
+  line-height: 1.8em;
+  padding: 6px 6px 4px;
+  position: relative;
+  text-decoration: none;
+  white-space: nowrap;
+  width: 275px;
+  margin-top: 2px;
+}
+.chosen_top {
+  margin-bottom: 3px;
+}
+.container_label {
+  font-size: 15px;
+}
+select {
+  width: 221px;
+}
+input[type="text"].container_cname {
+  width: 210px;
+}
+input:focus {
+  outline: none;
+  border-color: gunBlue;
+  box-shadow: 0 0 8px gunBlue;
+  -webkit-box-shadow: 0 0 8px gunBlue;
+}
+div.chzn-container input[type='text']:focus {
+  outline: none;
+  border-color: gunBlue;
+  box-shadow: 0 0 0 gunBlue;
+  -webkit-box-shadow: 0 0 0 gunBlue;
+}
+.field,
+.authform p {
+  margin-bottom: 16px;
+}
+.authform {
+  width: 480px;
+  margin-bottom: 20px;
+}
+.authform p:last-child {
+  margin-top: 18px;
+  margin-bottom: 0;
+}
+.authform p.flatbottom {
+  margin-bottom: 0;
+}
+.error {
+  border: 2px solid #f00;
+}
+.container_list_container .field .label {
+  font-size: 1.3em;
+}
+.helper {
+  float: left;
+  position: relative;
+}
+.helper .tip {
+  background: url("../img/helper.png") no-repeat 0 center;
+  width: 110px;
+  padding: 0 0 0 25px;
+  left: 290px;
+  display: none;
+  position: absolute;
+}
+.tip p {
+  font-size: 0.85em;
+  background: #edece9;
+  padding: 15px 20px 15px 20px;
+}
+.authform .tip p:last-child {
+  margin: 0;
+}
+.container_cname_default {
+  margin-top: 24px;
+  clear: left;
+}
+.default_container_checkbox {
+  margin-left: 6px;
+}
+.tip_username {
+  top: -15px;
+}
+.tip_apikey {
+  top: -9px;
+}
+.tip_host {
+  top: -5px;
+}

@@ -1,0 +1,147 @@
+@import 'reset'
+
+gunBlue = #2face1
+copyGrey = #aaabaa
+
+body
+  font: 62.5% 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-shadow: 0px 1px 0px #FFF;
+  background: #eae7e6 url(../img/bg.png);
+  color copyGrey
+
+a
+  color gunBlue
+  text-decoration none
+  font-weight 800
+  line-height 1
+  font-size 1.2em
+
+a:hover, a:focus, a:active
+  color #010101
+
+a:visited
+  color gunBlue
+
+#main
+  margin 30px auto
+  width 520px
+  
+header
+  width 50%
+  margin 0 auto
+  text-align center
+
+h1
+  font-size: 4.8em
+  font-weight: 300
+  line-height: 1.8em
+  margin 0
+
+h2
+  margin-top 0
+  font-size 2.4em
+  line-height 1.2em
+  text-align center
+  color copyGrey
+  font-weight 200
+
+@import 'form'
+@import 'loading'
+
+#holder
+  margin-top 30px
+  height 200px
+  width 424px
+  border-radius 6px
+  border 2px solid #ccc
+  background #ebedeb url('../img/drag_bg.png') no-repeat scroll 0 0
+  -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.58)
+
+#holder p
+  margin 10px auto
+  text-align center
+
+.drag_drop_container, .upload_container
+  margin 0 auto
+
+.upload_container
+  margin-bottom 10px
+  
+.web, .desktop, .hide
+  opacity 0
+
+.none
+  display none
+
+.awesome
+  background: #222 url(../img/overlay.png) repeat-x;
+  display: inline-block;
+  padding: 5px 10px 6px;
+  color: #fff;
+  text-decoration: none;
+  -webkit-border-radius: 5px;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+  position: relative;
+  cursor: pointer;
+
+.awesome, .awesome:visited
+  font-size: 1.2em;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+  margin 0 auto
+  color gunBlue
+  margin-top 4px
+
+.awesome:hover
+  background-color: #111
+  color: #fff
+
+.large.awesome, .large.awesome:visited
+  font-size 1.4em
+  padding 8px 14px 9px  
+
+.unable_frown
+  font-size 5em
+  line-height 1.2em
+  text-align center
+  
+span[frown]
+  -webkit-transform rotate(90deg)
+  display inline-block
+  color #222
+  font-size 2.4em
+
+.shadowbox  
+  -webkit-box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(0,0,0,0.05);
+  border-radius 4px
+  position: relative
+  margin: 0 auto;
+  background-color: rgba(255,255,255,0.75);
+  padding: 20px 20px 30px;
+
+.results
+  margin 20px
+  padding: 10px 0
+  background-color: #EBEDEB;
+  border: 2px solid #CCC;
+  border-bottom-left-radius: 6px 6px;
+  border-bottom-right-radius: 6px 6px;
+  border-top-left-radius: 6px 6px;
+  border-top-right-radius: 6px 6px;
+    
+.results p
+  text-align center
+  font-size 1.2em
+  padding 0 10px  
+  
+.fixed_bottom
+  margin: 0 auto;
+  display: block;
+  width: 64px;
+
+@import 'chosen'
+@import 'dragdrop'  
+@import 'animations'
