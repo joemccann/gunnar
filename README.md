@@ -2,17 +2,13 @@
 
 A desktop app/widget to upload files to your Rackspace Cloud Files server.
 
-***
 <br>
-
 ## Requirements #
 - node 0.4.8+
 - Titanium Desktop 1.2
 
 
-***
 <br>
-
 ## Installation #
 
 Clone the repo.
@@ -23,9 +19,7 @@ Clone the repo.
 
 You are now ready to start hacking.
 
-***
 <br>
-
 ## Hacking#
 
 
