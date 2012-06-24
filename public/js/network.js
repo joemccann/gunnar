@@ -547,14 +547,15 @@ var networkModule = function(){
             
             _httpClient  = Ti.Network.createHTTPClient();
 
-            // TODO:  Update this with more relevant, useful stuff.
-            _httpClient.onreadystatechange = function(data){
-                if( _httpClient.readyState == 4)
-                {
-                  // console.log(data)
-                  // if(data)
-                }
-            }
+            // // TODO:  Update this with more relevant, useful stuff.
+            // _httpClient.onreadystatechange = function(data){
+            //     if( _httpClient.readyState == 4)
+            //     {
+            //       _setAuthHandler(null, data, _httpClient)
+            //     }
+            // }
+            
+            console.log(_httpClient)
 
             _httpClient.onload = function(data){
               _setAuthHandler(null, data, _httpClient)
