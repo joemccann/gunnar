@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gunnar</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div id="main">
+    <div class="form init">
+  <div class="shadowbox authform">
+  <h2>Please Enter Your Rackspace Credentials</h2>
+  <form id="rackspaceCredForm" action="#" name="rackspaceCredForm"> 
+
+
+
+    <div class="field required">
+
+      <div class="label" id="for_username">
+        <span class="content">
+          <span class="innerlabel">Username</span>
+          
+          <span class="help">(Required)</span>
+          
+        </span>
+        <input tabindex="1" type="text" id="username"  value="" />
+
+        <div class="helper">
+          <div class="tip tip_username">
+        	  <p>Enter your Rackspace Account username.</p>
+        	</div>
+        </div>
+
+      </div>
+  
+    </div>
+
+
+
+    <div class="field required">
+
+      <div class="label" id="for_apikey">
+        <span class="content">
+          <span class="innerlabel">Apikey</span>
+          
+          <span class="help">(Required)</span>
+          
+        </span>
+        <input tabindex="2" type="text" id="apikey"  value="" />
+
+        <div class="helper">
+          <div class="tip tip_apikey">
+        	  <p>Enter your Rackspace API Key.</p>
+        	</div>
+        </div>
+
+      </div>
+  
+    </div>
+
+
+
+    <div class="field required">
+
+      <div class="label" id="for_host">
+        <span class="content">
+          <span class="innerlabel">Host</span>
+          
+          <span class="help">(Required)</span>
+          
+        </span>
+        <input tabindex="3" type="text" id="host"  value="auth.api.rackspacecloud.com" />
+
+        <div class="helper">
+          <div class="tip tip_host">
+        	  <p>Enter your Rackspace API host.</p>
+        	</div>
+        </div>
+
+      </div>
+  
+    </div>
+
+
+
+    <p class="button_container">
+      <a href="#" tabindex='4' id="storeRackspaceCreds" class="large awesome">Save Credentials</a>
+    </p>
+    <p class="flatbottom">
+        Don't have your credentials? <a target="_blank" href="https://manage.rackspacecloud.com/APIAccess.do">Go To Your Rackspace Account →</a>
+    </p>
+    <p class="flatbottom">
+        Don't have a Rackspace account? <a target="_blank" href="http://www.rackspacecloud.com/2469.html">Get One for Free Here →</a>
+    </p>
+
+  </form> 
+
+</div> <!-- end shadowbox -->
+</div>
+
+<div class="desktop shadowbox none">
+  <div class="spinner_copy hide"> 
+
+    <div class="bar1"> </div> 
+
+    <div class="bar2"> </div> 
+
+    <div class="bar3"> </div> 
+
+    <div class="bar4"> </div> 
+
+    <div class="bar5"> </div> 
+
+    <div class="bar6"> </div> 
+
+    <div class="bar7"> </div> 
+
+    <div class="bar8"> </div> 
+
+    <div class="bar9"> </div> 
+
+    <div class="bar10"> </div> 
+
+    <div class="bar11"> </div> 
+
+    <div class="bar12"> </div> 
+
+  </div>
+
+  <div class="container_list_container">
+  
+    <div class="field">
+
+      <div class='label' for="container_list">
+        <span class="content chosen_top">
+          <span class="container_label">Select Container</span>
+        </span>
+        <select id="container_list" name="container_list">
+          <option value="">Fetching Containers</option>
+          <option value="">No container here.</option>
+          <option value="">Not here either.</option>
+        </select>
+        
+        <span class="inline_left">
+          <input type="checkbox" id="default_container" class="default_container_checkbox" name="default_container" class="left" />
+        </span>
+        <span>Make Default Container</span>
+        
+      </div>
+            
+    </div>
+
+    <div class="field container_cname_default">
+
+      <div class="label" for="container_cname">
+        <input type="text" id="container_cname" class="container_cname" placeholder="img.cdn.foobar.com" name="container_cname" />
+        <span>
+          <span class="inline_left">CNAME (optional)</span>
+        </span>
+      </div>
+
+    </div>
+
+<!--    <div class="upload_container desktop upload">
+      <button id="go">Pick a file and upload.</button>
+    </div> -->
+
+    <div class="drag_drop_container desktop upload">
+  
+      <div id="holder">
+  
+      </div>
+  
+    </div>
+    
+    
+    <div class="results none">
+    
+      <a href="#" id="clear_results" class="large awesome fixed_bottom">Clear List</a>
+
+    </div>
+    
+
+  </div>
+  
+</div>
+
+
+    </div>
+    <div class="spinner hide"> 
+
+  <div class="bar1"> </div> 
+
+  <div class="bar2"> </div> 
+
+  <div class="bar3"> </div> 
+
+  <div class="bar4"> </div> 
+
+  <div class="bar5"> </div> 
+
+  <div class="bar6"> </div> 
+
+  <div class="bar7"> </div> 
+
+  <div class="bar8"> </div> 
+
+  <div class="bar9"> </div> 
+
+  <div class="bar10"> </div> 
+
+  <div class="bar11"> </div> 
+
+  <div class="bar12"> </div> 
+
+</div>
+
+    
+      <script type="text/javascript" src="js/jquery-1.6.1.min.js"></script> 
+      <script type="text/javascript" src="js/chosen.jquery.min.js"></script> 
+      <script type="text/javascript" src="js/setup.js"></script> 
+      <script type="text/javascript" src="js/utils.js"></script> 
+      <script type="text/javascript" src="js/menu.js"></script>
+      <script type="text/javascript" src="js/network.js"></script> 
+      <script type="text/javascript" src="js/filesystem.js"></script>  
+      <script type="text/javascript" src="js/properties.js"></script>
+      <script type="text/javascript" src="js/spinner.js"></script>
+      <script type="text/javascript" src="js/code.js"></script> 
+    
+    </body>
+</html>
