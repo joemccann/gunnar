@@ -401,8 +401,6 @@ $().ready(function(){
       // Show Inspector
       debug && _curwin.showInspector()
 
-
-      console.log( new uiModule() )
       Gun.ui = new uiModule()
 
       // Programmatically center the app.
