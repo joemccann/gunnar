@@ -9,5 +9,5 @@
     "DIST_DIR": "./public/css",
     "style": ["./public/css/style.css"]
   },
-  "DEBUG": false
+  "DEBUG": true
 }

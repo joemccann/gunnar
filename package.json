@@ -5,8 +5,7 @@
   , "keywords": "rackspace, cloud"
   , "private": true
   , "dependencies": {
-      "express": "2.4.6"
-    , "cluster": "0.6.4"
+      "express": "2.5.9"
     , "colors": "0.5.0"
     , "ejs": "0.4.3"
     , "smoosh": "0.3.0"

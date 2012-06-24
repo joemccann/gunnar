@@ -6,6 +6,9 @@ var express = require('express')
   , path = require('path')
   , colors = require('colors')
   , strings = require(__dirname +  '/utils/strings')
+  
+// For cluster...
+var numCPUs = require('os').cpus().length
 
 // Some setup variables and helpers.  
 var isFirstRunComplete = false
@@ -121,15 +124,34 @@ function mergeObject(to, from)
 
 function init()
 {
-  console.log('\n\nRemoving and creating index and results pages...')
-  var child = removeIndexPage(createIndexPage);
-  createResultsPage()
+  if (cluster.isMaster){
+
+    // Fork workers.
+    for (var i = 0; i < (debug ? 1 : numCPUs); i++) {
+      cluster.fork()
+    }
+
+    cluster.on('death', function(worker) {
+      // We need to spin back up on death.
+      cluster.fork()
+      console.log('worker ' + worker.pid + ' died');
+    })
+
+    // Bad hack, but it works...
+    setTimeout(function(){
+      console.log('\n\nRemoving and creating index and results pages...')
+
+      var child = removeIndexPage(createIndexPage);
+      createResultsPage()
+
+    },3000)
+
+    
+  }
+  else{ app.listen(3000) }
+  
 }
 
-cluster(app)
-  .set('workers', 1)
-  .use(cluster.debug())
-  .listen(3000);
 
-// init()
+init()
 
