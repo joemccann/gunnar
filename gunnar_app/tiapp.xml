@@ -1,33 +1,35 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<ti:app xmlns:ti='http://ti.appcelerator.org'>
-<!-- These values are edited/maintained by Titanium Developer -->
-<id>com.subprint.gunnar</id>
-<name>Gunnar</name>
-<version>0.0.1</version>
-<publisher>Joe McCann</publisher>
-<url>http://subprint.com</url>
-<icon>default_app_logo.png</icon>
-<copyright>2011 by Joe McCann</copyright>
-<!-- Window Definition - these values can be edited -->
-<window>
-<id>initial</id>
-<title>Gunnar</title>
-<url>app://index.html</url>
-<width>588</width>
-<max-width>588</max-width>
-<min-width>588</min-width>
-<height>466</height>
-<max-height>3000</max-height>
-<min-height>486</min-height>
-<x>0</x>
-<y>24</y>
-<fullscreen>false</fullscreen>
-<resizable>true</resizable>
-<chrome scrollbars="true">true</chrome>
-<maximizable>false</maximizable>
-<minimizable>true</minimizable>
-<closeable>true</closeable>
-<analytics>false</analytics>
-<update-monitor>false</update-monitor>
-</window>
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <sdk-version>1.2.0.RC4</sdk-version>
+    <description>Rackspace cloud files uploader.</description>
+    <!-- These values are edited/maintained by Titanium Developer -->
+    <id>com.subprint.gunnar</id>
+    <name>Gunnar</name>
+    <version>0.0.1</version>
+    <publisher>Joe McCann</publisher>
+    <url>http://subprint.com</url>
+    <icon>default_app_logo.png</icon>
+    <copyright>2011 by Joe McCann</copyright>
+    <!-- Window Definition - these values can be edited -->
+    <window>
+        <id>initial</id>
+        <title>Gunnar</title>
+        <url>app://index.html</url>
+        <width>588</width>
+        <max-width>588</max-width>
+        <min-width>588</min-width>
+        <height>466</height>
+        <max-height>3000</max-height>
+        <min-height>486</min-height>
+        <x>0</x>
+        <y>24</y>
+        <fullscreen>false</fullscreen>
+        <resizable>true</resizable>
+        <chrome scrollbars="true">true</chrome>
+        <maximizable>false</maximizable>
+        <minimizable>true</minimizable>
+        <closeable>true</closeable>
+        <analytics>false</analytics>
+        <update-monitor>false</update-monitor>
+    </window>
 </ti:app>

@@ -4,6 +4,17 @@
 #image:default_app_logo.png
 #url:http://subprint.com
 #guid:0eb01957-a020-46f9-a0ef-cd4f2106452e
-#desc:No description provided
+#desc:Rackspace cloud files uploader.
 #type:desktop
-runtime:1.1.0
+runtime:1.2.0.RC4
+tiapp:1.2.0.RC4
+tifilesystem:1.2.0.RC4
+tiplatform:1.2.0.RC4
+tiui:1.2.0.RC4
+ticodec:1.2.0.RC4
+tidatabase:1.2.0.RC4
+timedia:1.2.0.RC4
+timonkey:1.2.0.RC4
+tinetwork:1.2.0.RC4
+tiprocess:1.2.0.RC4
+tiworker:1.2.0.RC4
